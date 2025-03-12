@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-# IS216.P23
-=======
+
 <p align="center">
   <a href="https://www.uit.edu.vn/" title="Trường Đại học Công nghệ Thông tin" style="border: 5;">
     <img src="https://i.imgur.com/WmMnSRt.png" alt="Trường Đại học Công nghệ Thông tin | University of Information Technology">
@@ -51,4 +49,3 @@ Seminar nhóm: Lập trình Event-Driven với Java (WebSocket, RabbitMQ, Kafka)
 ## ĐỒ ÁN MÔN HỌC
 <a name="doan"></a>
 Đồ án Nhóm: Phần mềm quản lý hãng hàng không.
->>>>>>> 069eda9 (add commit)
