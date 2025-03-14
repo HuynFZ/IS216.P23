@@ -38,7 +38,7 @@
 | 1      | 23520641      | Nguyễn Văn Mạnh Huy    |[HuynFZ](https://github.com/HuynFZ)                        |23520641@gm.uit.edu.vn   |
 | 2      | 23521030      | Nguyễn Lê Bảo Ngọc     |[ngochoccode](https://github.com/ngochoccode)              |23521030@gm.uit.edu.vn   |
 | 3      | 23520698      | Nguyễn Thành Khang     |[Nguyen-Thanh-Khang](https://github.com/Nguyen-Thanh-Khang)|23520698@gm.uit.edu.vn   |
-| 2      | 23521434      | Trương Nguyên Đại Thắng|                                                           |23521434@gm.uit.edu.vn   |
+| 2      | 23521434      | Trương Nguyên Đại Thắng|[inwinnieworld](https://github.com/inwinnieworld)          |23521434@gm.uit.edu.vn   |
 
 
 ## SEMINAR
