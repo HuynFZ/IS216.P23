@@ -4,7 +4,10 @@
  */
 package View.Admin;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JComponent;
 
 /**
@@ -18,6 +21,9 @@ public class AdminTrangChu extends javax.swing.JFrame {
      */
     public AdminTrangChu() {
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                this.setSize(screenSize);
+                this.setLocationRelativeTo(null); // căn giữa màn hình
        menu.addEventMenu((int index) -> {
            if (index == 0)
            {
@@ -43,7 +49,8 @@ public class AdminTrangChu extends javax.swing.JFrame {
     private void setForm (JComponent com)
     {
         mainPanel.removeAll();
-        mainPanel.add(com);
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(com, BorderLayout.CENTER);
         mainPanel.repaint();
         mainPanel.revalidate();
     }
