@@ -226,7 +226,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="CCCD"/>
+            <Property name="text" type="java.lang.String" value="S&#x1ed1;  CCCD"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblNgaySinh">
@@ -506,7 +506,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="510" max="-2" attributes="0"/>
+                          <Component id="spDanhSach" min="-2" pref="510" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="46" max="32767" attributes="0"/>
@@ -531,7 +531,7 @@
                       <Component id="txtTimKiem" linkSize="5" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="529" max="-2" attributes="0"/>
+                  <Component id="spDanhSach" min="-2" pref="529" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -565,7 +565,7 @@
             </Property>
           </Properties>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="spDanhSach">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>

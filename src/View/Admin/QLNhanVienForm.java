@@ -46,7 +46,7 @@ public class QLNhanVienForm extends javax.swing.JPanel {
         lblDanhSach = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        spDanhSach = new javax.swing.JScrollPane();
         tblDanhSach = new javax.swing.JTable();
 
         pnlThaoTac.setBackground(java.awt.SystemColor.control);
@@ -63,7 +63,7 @@ public class QLNhanVienForm extends javax.swing.JPanel {
         lblHoTen.setText("Họ tên");
 
         lblCCCD.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
-        lblCCCD.setText("CCCD");
+        lblCCCD.setText("Số  CCCD");
 
         lblNgaySinh.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         lblNgaySinh.setText("Ngày sinh");
@@ -317,7 +317,7 @@ public class QLNhanVienForm extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblDanhSach);
+        spDanhSach.setViewportView(tblDanhSach);
 
         javax.swing.GroupLayout pnlDanhSachLayout = new javax.swing.GroupLayout(pnlDanhSach);
         pnlDanhSach.setLayout(pnlDanhSachLayout);
@@ -330,7 +330,7 @@ public class QLNhanVienForm extends javax.swing.JPanel {
                         .addComponent(lblDanhSach))
                     .addGroup(pnlDanhSachLayout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(spDanhSach, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDanhSachLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -349,7 +349,7 @@ public class QLNhanVienForm extends javax.swing.JPanel {
                     .addComponent(btnTimKiem)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spDanhSach, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -406,7 +406,6 @@ public class QLNhanVienForm extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbGioiTinh;
     private javax.swing.JComboBox<String> cmbGioiTinh1;
     private com.toedter.calendar.JDateChooser dcNgaySinh;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCCCD;
     private javax.swing.JLabel lblChucVu;
     private javax.swing.JLabel lblDanhSach;
@@ -423,6 +422,7 @@ public class QLNhanVienForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblThaoTac;
     private javax.swing.JPanel pnlDanhSach;
     private javax.swing.JPanel pnlThaoTac;
+    private javax.swing.JScrollPane spDanhSach;
     private javax.swing.JTable tblDanhSach;
     private javax.swing.JTextField txtCCCD1;
     private javax.swing.JTextField txtChucVu;

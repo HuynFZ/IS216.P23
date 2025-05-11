@@ -70,7 +70,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="510" max="-2" attributes="0"/>
+                          <Component id="spDanhSach" min="-2" pref="510" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="29" max="32767" attributes="0"/>
@@ -95,7 +95,7 @@
                       <Component id="txtTimKiem" linkSize="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="529" max="-2" attributes="0"/>
+                  <Component id="spDanhSach" min="-2" pref="529" max="-2" attributes="0"/>
                   <EmptySpace pref="65" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -126,7 +126,7 @@
             </Property>
           </Properties>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="spDanhSach">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -170,11 +170,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="219" max="-2" attributes="0"/>
-                          <Component id="lblThaoTac" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -221,6 +217,10 @@
                                   <Component id="pnlLichBaoTri" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
+                          <Component id="lblThaoTac" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="60" max="32767" attributes="0"/>
