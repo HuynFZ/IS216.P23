@@ -4,7 +4,7 @@
  */
 package View.TrangChu;
 
-import View.DatVe.DatVe;
+
 import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -18,10 +18,8 @@ import javax.swing.JFrame;
  */
 public class TrangChu extends javax.swing.JFrame {
 
-
-//    public TrangChu() {
-//        initComponents();
-//    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -68,8 +66,10 @@ public class TrangChu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public TrangChu() {
+    private final String accId;
+    public TrangChu(String accId) {
         initComponents();
+        this.accId = accId;
        menuTC.addEventMenu((int index) -> {
            if (index == 0)
            {
@@ -77,15 +77,22 @@ public class TrangChu extends javax.swing.JFrame {
            } else if (index == 1)
            {
                try {
-                   setForm(new DatVeForm());
+                   setForm(new DatVeForm(mainPanel, accId));
                } catch (ClassNotFoundException ex) {
                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
                } catch (SQLException ex) {
                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
                }
-           } else 
+           } else if (index == 2)
            {
-               
+               setForm(new VeCuaToiForm(mainPanel, accId));
+           }
+           else if (index == 5)
+           {
+               setForm(new TaiKhoanForm(mainPanel, accId));
+           } else
+           {
+                   
            }
         });
        setForm(new TrangChuForm());
@@ -99,35 +106,11 @@ public class TrangChu extends javax.swing.JFrame {
         mainPanel.repaint();
         mainPanel.revalidate();
     }
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new TrangChu().setVisible(true);
-        });
-    }
+//    public static void main(String args[]) {
+//        java.awt.EventQueue.invokeLater(() -> {
+//            new TrangChu(accId).setVisible(true);
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
