@@ -1,23 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View.Admin;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JComponent;
 
-/**
- *
- * @author Huy Nguyen
- */
+
 public class AdminTrangChu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AdminTrangChu
-     */
     public AdminTrangChu() {
         initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
+        this.setLocationRelativeTo(null); 
        menu.addEventMenu((int index) -> {
            if (index == 0)
            {
@@ -31,7 +27,7 @@ public class AdminTrangChu extends javax.swing.JFrame {
            } else if (index == 3)
            {
                setForm(new QLNhanVienForm());
-           } else
+           } else 
            {
                
            }

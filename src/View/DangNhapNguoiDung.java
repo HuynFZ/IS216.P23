@@ -252,6 +252,7 @@ public class DangNhapNguoiDung extends javax.swing.JFrame {
         //Lay ket qua tu CSDL
         UserResponse isSuccess = user.dangNhapTK(usernameText, passwordHash);
         String role = isSuccess.getRole();
+        String accid = String.valueOf(isSuccess.getAccID());
         
         RoleGroupType roleGr = new RoleGroupType();
         
@@ -261,7 +262,8 @@ public class DangNhapNguoiDung extends javax.swing.JFrame {
             System.out.println(role);
             if (role.equalsIgnoreCase(roleGr.KHACHHANG))
             {
-                TrangChu trangchu = new TrangChu();
+                
+                TrangChu trangchu = new TrangChu(accid);
                 trangchu.setVisible(true);
                 trangchu.pack();
                 trangchu.setExtendedState(JFrame.MAXIMIZED_BOTH);
