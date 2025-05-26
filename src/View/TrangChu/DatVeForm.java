@@ -176,6 +176,7 @@ public class DatVeForm extends javax.swing.JPanel {
         bangChuyenBay.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
         bangChuyenBay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
