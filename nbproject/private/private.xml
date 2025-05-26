@@ -70,7 +70,6 @@
             <file>file:/D:/NetBeans-25/QLHangHangK/src/View/DatVe/ThanhToanMoMo.java</file>
             <file>file:/D:/NetBeans-25/QLHangHangK/src/View/TrangChu/VeCuaToiForm.java</file>
             <file>file:/D:/NetBeans-25/QLHangHangK/src/View/Admin/TaiKhoanNhanVienForm.java</file>
-            <file>file:/D:/NetBeans-25/QLHangHangK/src/View/TrangChu/XemChiTietVe.java</file>
             <file>file:/D:/NetBeans-25/QLHangHangK/src/View/DatVe/ChonHanhLy.java</file>
             <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/HanhLy/HanhlyDS.java</file>
             <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/HanhLy/HanhLyModel.java</file>
@@ -83,6 +82,21 @@
             <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/ThanhToan/ThemThanhToan.java</file>
             <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/DichVu/ThemChiTietDichVu.java</file>
             <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/KhachHang/LayMaKH.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/View/TrangChu/XemChiTietVe.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/VeMayBay/DanhSachVe.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/VeMayBay/VeMayBayModel.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/HanhKhach/DanhSachHK.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/VeMayBay/LayGiaVe.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/KhuyenMai/LayGiaTriKM.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/TimeConverter.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/KhachHang/ThongTinKH.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/KhachHang/KhachHangModel.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/KhachHang/SuaKhachHang.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Image/Admin/9.png</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Image/Admin/8.png</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Image/Admin/7.png</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/NhanVien/ThongTinNV.java</file>
+            <file>file:/D:/NetBeans-25/QLHangHangK/src/Process/NhanVien/NhanVienModel.java</file>
         </group>
     </open-files>
 </project-private>

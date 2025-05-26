@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View.TrangChu;
 
 
@@ -12,10 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-/**
- *
- * @author Huy Nguyen
- */
+
 public class TrangChu extends javax.swing.JFrame {
 
     
@@ -85,11 +79,23 @@ public class TrangChu extends javax.swing.JFrame {
                }
            } else if (index == 2)
            {
-               setForm(new VeCuaToiForm(mainPanel, accId));
+               try {
+                   setForm(new VeCuaToiForm(mainPanel, accId));
+               } catch (ClassNotFoundException ex) {
+                   Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+               } catch (SQLException ex) {
+                   Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+               }
            }
            else if (index == 5)
            {
-               setForm(new TaiKhoanForm(mainPanel, accId));
+               try {
+                   setForm(new TaiKhoanForm(mainPanel, accId));
+               } catch (ClassNotFoundException ex) {
+                   Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+               } catch (SQLException ex) {
+                   Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+               }
            } else
            {
                    

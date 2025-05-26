@@ -1,7 +1,20 @@
 
 package View.TrangChu;
 
+import Process.KhachHang.LayMaKH;
+import Process.VeMayBay.DanhSachVe;
+import Process.VeMayBay.VeMayBayModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComponent;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 
 public class VeCuaToiForm extends javax.swing.JPanel {
@@ -9,10 +22,88 @@ public class VeCuaToiForm extends javax.swing.JPanel {
     private final JPanel mainPanel;
     private final String accId;
 
-    public VeCuaToiForm(JPanel mainPanel, String accId) {
+    public VeCuaToiForm(JPanel mainPanel, String accId) throws ClassNotFoundException, SQLException {
         this.mainPanel = mainPanel;
         this.accId =accId;
         initComponents();
+        
+        
+        try {
+            hienThiDanhSach(accId);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VeCuaToiForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(VeCuaToiForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        btnXemChiTiet.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = bangVe.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng chọn một vé để xem chi tiết.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                // Lấy mã vé từ dòng đã chọn (giả sử mã vé ở cột 0)
+                String maVe = bangVe.getValueAt(selectedRow, 0).toString();
+                String maChuyen = bangVe.getValueAt(selectedRow, 1).toString();
+                String soLuongVeStr = bangVe.getValueAt(selectedRow, 2).toString();
+                int soLuongVe = Integer.parseInt(soLuongVeStr);
+                String diemDi = bangVe.getValueAt(selectedRow, 3).toString();
+                String diemDen = bangVe.getValueAt(selectedRow, 4).toString();
+                String gioCatCanh = bangVe.getValueAt(selectedRow, 5).toString();
+                String gioHaCanh = bangVe.getValueAt(selectedRow, 6).toString();
+                try {
+                    setForm (new XemChiTietVe(maVe, maChuyen, diemDi, diemDen, gioCatCanh, gioHaCanh, soLuongVe, mainPanel, accId));
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VeCuaToiForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VeCuaToiForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    
+    private void hienThiDanhSach(String accId) throws ClassNotFoundException, SQLException
+    {
+        try {
+        String maKH = LayMaKH.layMaKHTuAccount(accId);
+        ArrayList<VeMayBayModel> danhSachVe = DanhSachVe.layVeTuMaKhachHang(maKH);
+        DefaultTableModel model = (DefaultTableModel) bangVe.getModel();
+        model.setRowCount(0);
+        
+        for (VeMayBayModel ve : danhSachVe)
+        {
+            model.addRow(new Object[]{
+                ve.getMaVe(),
+                ve.getMaChuyenBay(),
+                ve.getTongHanhKhach(),
+                ve.getMaSanBayDi(),
+                ve.getMaSanBayDen(),
+                ve.getGioCatCanh(),
+                ve.getGioHaCanh(),
+                ve.getNgayDatVe(),
+                ve.getTrangThaiVe(),
+                ve.getThoiGianTT(),
+                ve.getTrangThaiTT()
+            });
+        }
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi tải dữ liệu vé: " + e.getMessage());
+         }
+         
+        
+        
+    }
+    
+    private void setForm (JComponent com)
+    {
+        mainPanel.removeAll();
+        mainPanel.add(com);
+        mainPanel.repaint();
+        mainPanel.revalidate();
     }
    
 
@@ -24,10 +115,10 @@ public class VeCuaToiForm extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        bangVe = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnXemChiTiet = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         jLabel4 = new javax.swing.JLabel();
@@ -61,27 +152,27 @@ public class VeCuaToiForm extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        bangVe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã đặt vé", "Số lượng vé", "Điểm đi", "Điểm đến", "Thời gian cất cánh", "Thời gian hạ cánh", "Ngày đặt vé", "Trạng thái vé", "Ngày giờ thanh toán", "Trạng thái thanh toán"
+                "Mã đặt vé", "Mã chuyến bay", "Số lượng vé", "Điểm đi", "Điểm đến", "Thời gian cất cánh", "Thời gian hạ cánh", "Ngày đặt vé", "Trạng thái vé", "Ngày giờ thanh toán", "Trạng thái thanh toán"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setRowHeight(40);
-        jScrollPane1.setViewportView(jTable1);
+        bangVe.setRowHeight(40);
+        jScrollPane1.setViewportView(bangVe);
 
         jPanel2.setBackground(new java.awt.Color(204, 0, 153));
 
@@ -103,13 +194,13 @@ public class VeCuaToiForm extends javax.swing.JPanel {
                 .addGap(0, 9, Short.MAX_VALUE))
         );
 
-        jButton1.setBackground(new java.awt.Color(204, 0, 255));
-        jButton1.setFont(new java.awt.Font("UTM Centur", 1, 20)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Xem chi tiết");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnXemChiTiet.setBackground(new java.awt.Color(204, 0, 255));
+        btnXemChiTiet.setFont(new java.awt.Font("UTM Centur", 1, 20)); // NOI18N
+        btnXemChiTiet.setForeground(new java.awt.Color(255, 255, 255));
+        btnXemChiTiet.setText("Xem chi tiết");
+        btnXemChiTiet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnXemChiTietActionPerformed(evt);
             }
         });
 
@@ -120,8 +211,6 @@ public class VeCuaToiForm extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("UTM Centur", 0, 24)); // NOI18N
         jLabel4.setText("Năm");
-
-        jYearChooser1.setFont(new java.awt.Font("UTM Centur", 0, 24)); // NOI18N
 
         jButton2.setBackground(new java.awt.Color(0, 255, 51));
         jButton2.setFont(new java.awt.Font("UTM Centur", 0, 20)); // NOI18N
@@ -173,7 +262,7 @@ public class VeCuaToiForm extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1219, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXemChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -183,7 +272,7 @@ public class VeCuaToiForm extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXemChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -213,9 +302,9 @@ public class VeCuaToiForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnXemChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemChiTietActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnXemChiTietActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -227,7 +316,8 @@ public class VeCuaToiForm extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTable bangVe;
+    private javax.swing.JButton btnXemChiTiet;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -239,7 +329,6 @@ public class VeCuaToiForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     // End of variables declaration//GEN-END:variables
 }

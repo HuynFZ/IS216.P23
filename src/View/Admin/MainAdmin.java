@@ -7,7 +7,7 @@ package View.Admin;
 
 public class MainAdmin {
     public static void main(String[] args) {
-        AdminTrangChu tc = new AdminTrangChu();
+        AdminTrangChu tc = new AdminTrangChu("2");
         tc.setVisible(true);
         tc.pack();
         tc.setLocationRelativeTo(null);

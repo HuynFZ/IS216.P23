@@ -40,7 +40,7 @@ public class DangKiDVu extends javax.swing.JPanel {
         LoaiHinhBay.setText("Chuyến bay " + loaiHinh);
         tongSoKH = nguoiLon + treEm + emBe;
         this.mainPanel = mainJPanel;
-        this.accId =accId;
+        this.accId = accId;
         String chiTiet = "";
         if (nguoiLon > 0) 
         {
