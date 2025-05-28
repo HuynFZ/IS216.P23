@@ -1,6 +1,7 @@
 
 package View.Admin;
 
+import View.DangNhapNguoiDung;
 import View.TrangChu.TaiKhoanForm;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 
 public class AdminTrangChu extends javax.swing.JFrame {
@@ -42,9 +44,21 @@ public class AdminTrangChu extends javax.swing.JFrame {
                } catch (SQLException ex) {
                    Logger.getLogger(AdminTrangChu.class.getName()).log(Level.SEVERE, null, ex);
                }
-           } else
+           } else if (index == 11)
            {
-               
+               int choice = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất?", "Xác nhận đăng xuất", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    // Đóng form TrangChu
+                    dispose();
+                    
+                    DangNhapNguoiDung DangNhapFrame = new DangNhapNguoiDung();
+                    DangNhapFrame.setVisible(true);
+                    DangNhapFrame.pack();
+                    DangNhapFrame.setLocationRelativeTo(null);
+                }
+           } else 
+
+           {
            }
         });
        setForm(new BangDieuKhien());

@@ -1,28 +1,199 @@
 
 package View.DatVe;
 
+import Process.ChiaTime;
+import Process.HanhKhach.ThemHanhKhach;
 import Process.HanhKhach.UserHanhKhach;
+import Process.KhachHang.LayMaKH;
+import Process.KhachHang.TruDiemKhachHang;
+import Process.SanBay.TimTinhTP;
+import Process.ThanhToan.ThemThanhToan;
+import Process.VeMayBay.ThemVeMayBay;
+import View.TrangChu.VeCuaToiForm;
+import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
 public class ThanhToanMoMo extends javax.swing.JFrame {
 
-    private String maChuyen, diemDi, diemDen, gioCatCanh, gioHaCanh, giaVe, loaiHinh, maKhuyenMai;
-    private int nguoiLon, treEm, emBe, tongSoKH;
+    private String maChuyen, diemDi, diemDen, gioCatCanh, gioHaCanh, giaVe, loaiHinh, maKhuyenMai, maVe, diemThuong;
+    int nguoiLon, treEm, emBe, tongSoKH;
     private String accId;
     private static List<UserHanhKhach> danhSachHanhKhach = new ArrayList<>();
-    
-    public ThanhToanMoMo(String maChuyen, String diemDi, String diemDen, String gioCatCanh, String gioHaCanh, int nguoiLon, int treEm, int emBe, String giaVe, String loaiHinh, int tongSoKH, double tongGV, double thuePhi, double tongTien, List<UserHanhKhach> danhSachHanhKhach, String maKhuyenMai) {
+    private double phiChoNgoi = 0;
+    private double phiHanhLy = 0;
+    private double phiSuatAn = 0;
+    private double phiBaoHiem = 0;
+    private double tongPhiDichVu = 0;
+    private double tongTien = 0;
+    private double tongTienSauCung = 0;
+    private final JPanel mainPanel;
+
+    public ThanhToanMoMo(JPanel mainJPanel, String maChuyen, String diemDi, String diemDen, String gioCatCanh, String gioHaCanh, int nguoiLon, int treEm, int emBe, String giaVe, String loaiHinh, int tongSoKH, double tongGV, double thuePhi, double tongTienSauCung, List<UserHanhKhach> danhSachHanhKhach, String maKhuyenMai, String accId, String diemThuong, double tongDiemT, double tienGiam, double tongTien, double tongPhiDV, double phiChoNgoi, double phiHanhLy, double phiBaoHiem, double phiSuatAn) throws  ClassNotFoundException {
         initComponents();
+        this.tongTienSauCung = tongTienSauCung;
+        this.tongTien = tongTien;
+        this.tongPhiDichVu = tongPhiDV;
+        this.phiChoNgoi = phiChoNgoi;
+        this.phiHanhLy = phiHanhLy;
+        this.phiBaoHiem = phiBaoHiem;
+        this.phiSuatAn = phiSuatAn;
+        this.mainPanel = mainJPanel;
+        this.diemThuong = diemThuong;
         
+        this.accId = accId;
+        this.tongSoKH = tongSoKH;
+        String tenThanhPhoDi = TimTinhTP.timTinhTP(diemDi);
+        String tenThanhPhoDen = TimTinhTP.timTinhTP(diemDen);
+        diemDiDen.setText(tenThanhPhoDi + " - " + tenThanhPhoDen );
+        
+        String[] chiaTimeDi = ChiaTime.tachTime(gioCatCanh);
+        String[] chiaTimeDen = ChiaTime.tachTime(gioHaCanh);
+        System.out.println(chiaTimeDi[0] + " | " + chiaTimeDen[0] );
+        
+        if (chiaTimeDi[0].equals(chiaTimeDen[0])) 
+        {
+            NoiDung.setText(chiaTimeDi[0] + " | " + chiaTimeDi[1] + " - " + chiaTimeDen[1] + " | " + maChuyen);
+        }
+        
+        for (UserHanhKhach hk : danhSachHanhKhach)
+        {
+            cbThongTinHK.addItem(hk.getHo() + " " + hk.getTen());
+        }
+        
+        giaVeBay.setText(giaVe + " VND");
+        String giaVeRaw = giaVe.replace(",", "").replace(" VND", "").trim();
+        
+        // Khởi tạo format cho tiền tệ Việt Nam
+        NumberFormat nf = NumberFormat.getInstance(new Locale("vi", "VN"));
+        String giaVeFormatted = nf.format(tongGV) + " VND";
+        String thuePhiFormatted = nf.format(thuePhi) + " VND";
+        String tongTienFormatted = nf.format(tongTienSauCung) + " VND";
+
+        tongGiaVe.setText(giaVeFormatted);
+
+        lblThuePhi.setText(thuePhiFormatted);
+
+        lblTongTien.setText(tongTienFormatted);
+        
+        lblDiemTV.setText(tongDiemT + " VND");
+        
+        lblGiamGia.setText(tienGiam + "VND");
+        
+        tienDV.setText(tongPhiDichVu + " VND");
+        tienDatCho.setText("Phí đặt chỗ: " + phiChoNgoi + " VND");
+        tienHanhLy.setText("Phí hành lý: " + phiHanhLy + " VND");
+        tienSuatAn.setText("Phí suất ăn: " + phiSuatAn + " VND");
+        tienBaoHiem.setText("Phí bảo hiểm: " + phiBaoHiem + " VND");
+        
+
         btnHuyTT.addActionListener(e -> {
             dispose();
         });
         
         btnXacNhanTT.addActionListener(e -> {
-            dispose();
-        });
+            String maKhachHang = null;
+
+            try {
+                maKhachHang = LayMaKH.layMaKHTuAccount(accId);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
+                return; // thoát nếu lỗi
+            }
+
+            if (maKhachHang == null || maKhachHang.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy mã khách hàng!");
+                return;
+            }
+
+            try {
+                 maVe = ThemVeMayBay.themVeMayBay(maChuyen, maKhachHang, tongTien, "Vé xác định", "Đã thanh toán");
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Lỗi khi thêm vé máy bay!");
+                return;
+            }
+            
+            for (UserHanhKhach hk : danhSachHanhKhach)
+            {
+                String hoTen = hk.getHo() + " " + hk.getTen();
+                double phiBoS = hk.getTienGhe() + hk.getPhiHanhly() + 100000;
+                String giaVeClean = giaVe.replace(",", "");
+                double giaVeDouble = Double.parseDouble(giaVeClean);
+                java.sql.Date ngaySinhSql = new java.sql.Date(hk.getNgaySinh().getTime());
+                String gioiTinh = hk.getGioiTinh();
+                String gioiTinhDB;
+                if (gioiTinh.equalsIgnoreCase("Nam")) {
+                    gioiTinhDB = "M";
+                } else if (gioiTinh.equalsIgnoreCase("Nữ")) {
+                    gioiTinhDB = "F";
+                } else {
+                    gioiTinhDB = "U"; 
+                }
+
+
+                try {
+                    ThemHanhKhach.themHanhKhach(hoTen, hk.getCccd(), ngaySinhSql, gioiTinhDB, hk.getQuocTich(), hk.getSoDienThoai(),
+                                                hk.getEmail(), maVe, "Economy", giaVeDouble, phiBoS, hk.getViTriGhe());
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Lỗi khi thêm hành khách!");
+                    return;
+                }
+            }
+            
+            if (this.diemThuong == null || this.diemThuong.trim().isEmpty()) {
+            this.diemThuong = "0"; // hoặc hiển thị cảnh báo cho người dùng
+            }  
+            
+            double diemThuongDouble = Double.parseDouble(diemThuong);
+            try {
+                
+                 TruDiemKhachHang.truDiem(maKhachHang, diemThuongDouble);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Lỗi khi trừ điểm!");
+                return;
+            }
+            
+            
+            try {
+                
+                 ThemThanhToan.themThanhToan(maVe, maKhuyenMai, tongTien,"Ví điện tử","Đang xử lý");
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Lỗi khi thêm thanh toán!");
+                return;
+            }
+            
+            JOptionPane.showMessageDialog(null,"Bạn đã thanh toán thành công");
+
+                dispose();
+            try {
+                setForm (new VeCuaToiForm(mainPanel, accId));
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ThanhToanMoMo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ThanhToanMoMo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            });
+
+    }
+    
+    private void setForm (JComponent com)
+    {
+        mainPanel.removeAll();
+        mainPanel.add(com);
+        mainPanel.repaint();
+        mainPanel.revalidate();
     }
 
 
@@ -34,7 +205,7 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbThongTinHK = new javax.swing.JComboBox<>();
         jPanel13 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         giaVeBay = new javax.swing.JLabel();
@@ -48,17 +219,20 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
         lblThuePhi = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        tienDV = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         lblTongTien = new javax.swing.JLabel();
         tienDatCho = new javax.swing.JLabel();
         tienHanhLy = new javax.swing.JLabel();
-        phiSuatAn = new javax.swing.JLabel();
-        phiBaoHiem = new javax.swing.JLabel();
+        tienSuatAn = new javax.swing.JLabel();
+        tienBaoHiem = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
+        lblGiamGia = new javax.swing.JLabel();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        lblDiemTV = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -95,10 +269,10 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jComboBox1.setBackground(new java.awt.Color(229, 229, 229));
-        jComboBox1.setEditable(true);
-        jComboBox1.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thông tin hành khách" }));
+        cbThongTinHK.setBackground(new java.awt.Color(229, 229, 229));
+        cbThongTinHK.setEditable(true);
+        cbThongTinHK.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
+        cbThongTinHK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thông tin hành khách" }));
 
         jPanel13.setBackground(new java.awt.Color(174, 226, 250));
 
@@ -192,8 +366,8 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
         jLabel32.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
         jLabel32.setText("Dịch vụ");
 
-        jLabel33.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
-        jLabel33.setText("jLabel29");
+        tienDV.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
+        tienDV.setText("jLabel29");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -203,7 +377,7 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tienDV, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60))
         );
         jPanel16Layout.setVerticalGroup(
@@ -211,7 +385,7 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tienDV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel17.setBackground(new java.awt.Color(213, 0, 0));
@@ -250,20 +424,20 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
         tienHanhLy.setForeground(new java.awt.Color(51, 51, 51));
         tienHanhLy.setText("Phí hành lý");
 
-        phiSuatAn.setFont(new java.awt.Font("UTM Times", 0, 16)); // NOI18N
-        phiSuatAn.setForeground(new java.awt.Color(51, 51, 51));
-        phiSuatAn.setText("Phí suất ăn");
+        tienSuatAn.setFont(new java.awt.Font("UTM Times", 0, 16)); // NOI18N
+        tienSuatAn.setForeground(new java.awt.Color(51, 51, 51));
+        tienSuatAn.setText("Phí suất ăn");
 
-        phiBaoHiem.setFont(new java.awt.Font("UTM Times", 0, 16)); // NOI18N
-        phiBaoHiem.setForeground(new java.awt.Color(51, 51, 51));
-        phiBaoHiem.setText("Phí bảo hiểm");
+        tienBaoHiem.setFont(new java.awt.Font("UTM Times", 0, 16)); // NOI18N
+        tienBaoHiem.setForeground(new java.awt.Color(51, 51, 51));
+        tienBaoHiem.setText("Phí bảo hiểm");
 
         jLabel34.setBackground(new java.awt.Color(229, 229, 229));
         jLabel34.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
         jLabel34.setText("Giảm giá");
 
-        jLabel35.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
-        jLabel35.setText("jLabel29");
+        lblGiamGia.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
+        lblGiamGia.setText("jLabel29");
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -273,7 +447,7 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60))
         );
         jPanel18Layout.setVerticalGroup(
@@ -281,7 +455,33 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblGiamGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jLabel36.setBackground(new java.awt.Color(229, 229, 229));
+        jLabel36.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
+        jLabel36.setText("Điểm thành viên");
+
+        lblDiemTV.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
+        lblDiemTV.setText("0 VND");
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDiemTV, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(lblDiemTV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -302,8 +502,8 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
                                     .addComponent(tienDatCho, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(phiSuatAn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(phiBaoHiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(tienSuatAn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tienBaoHiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel11Layout.createSequentialGroup()
                                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(diemDiDen, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,11 +512,12 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
                                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbThongTinHK, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
@@ -324,7 +525,7 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbThongTinHK, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
@@ -340,14 +541,16 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tienDatCho, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(phiSuatAn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tienSuatAn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tienHanhLy, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(phiBaoHiem, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tienBaoHiem, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -416,7 +619,7 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHuyTT, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXacNhanTT, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -477,9 +680,9 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
     private javax.swing.JLabel NoiDung;
     private javax.swing.JButton btnHuyTT;
     private javax.swing.JButton btnXacNhanTT;
+    private javax.swing.JComboBox<String> cbThongTinHK;
     private javax.swing.JLabel diemDiDen;
     private javax.swing.JLabel giaVeBay;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -488,9 +691,8 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -500,13 +702,17 @@ public class ThanhToanMoMo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblDiemTV;
+    private javax.swing.JLabel lblGiamGia;
     private javax.swing.JLabel lblThuePhi;
     private javax.swing.JLabel lblTongTien;
-    private javax.swing.JLabel phiBaoHiem;
-    private javax.swing.JLabel phiSuatAn;
+    private javax.swing.JLabel tienBaoHiem;
+    private javax.swing.JLabel tienDV;
     private javax.swing.JLabel tienDatCho;
     private javax.swing.JLabel tienHanhLy;
+    private javax.swing.JLabel tienSuatAn;
     private javax.swing.JLabel tongGiaVe;
     // End of variables declaration//GEN-END:variables
 }

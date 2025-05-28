@@ -113,8 +113,8 @@
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="phiSuatAn" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="phiBaoHiem" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="tienSuatAn" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="tienBaoHiem" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -127,6 +127,7 @@
                                               <Component id="jPanel16" alignment="1" min="-2" pref="454" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="jPanel18" alignment="0" min="-2" pref="454" max="-2" attributes="0"/>
+                                          <Component id="jPanel19" alignment="0" min="-2" pref="454" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -134,7 +135,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                              <Component id="jComboBox1" min="-2" pref="451" max="-2" attributes="0"/>
+                              <Component id="cbThongTinHK" min="-2" pref="451" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="22" max="32767" attributes="0"/>
@@ -146,7 +147,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" min="-2" pref="46" max="-2" attributes="0"/>
+                      <Component id="cbThongTinHK" min="-2" pref="46" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -162,15 +163,17 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tienDatCho" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="phiSuatAn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="tienSuatAn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tienHanhLy" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="phiBaoHiem" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="tienBaoHiem" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel18" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPanel19" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -220,7 +223,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="cbThongTinHK">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e5" green="e5" red="e5" type="rgb"/>
@@ -410,7 +413,7 @@
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           <Component id="jLabel32" min="-2" pref="223" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jLabel33" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="tienDV" min="-2" pref="192" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -421,7 +424,7 @@
                           <Component id="jLabel32" min="-2" pref="45" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jLabel33" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tienDV" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -437,7 +440,7 @@
                     <Property name="text" type="java.lang.String" value="D&#x1ecb;ch v&#x1ee5;"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel33">
+                <Component class="javax.swing.JLabel" name="tienDV">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="UTM Times" size="18" style="0"/>
@@ -522,7 +525,7 @@
                 <Property name="text" type="java.lang.String" value="Ph&#xed; h&#xe0;nh l&#xfd;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="phiSuatAn">
+            <Component class="javax.swing.JLabel" name="tienSuatAn">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="UTM Times" size="16" style="0"/>
@@ -533,7 +536,7 @@
                 <Property name="text" type="java.lang.String" value="Ph&#xed; su&#x1ea5;t &#x103;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="phiBaoHiem">
+            <Component class="javax.swing.JLabel" name="tienBaoHiem">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="UTM Times" size="16" style="0"/>
@@ -553,7 +556,7 @@
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           <Component id="jLabel34" min="-2" pref="223" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jLabel35" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="lblGiamGia" min="-2" pref="192" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -564,7 +567,7 @@
                           <Component id="jLabel34" min="-2" pref="45" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jLabel35" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblGiamGia" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -580,12 +583,58 @@
                     <Property name="text" type="java.lang.String" value="Gi&#x1ea3;m gi&#xe1;"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel35">
+                <Component class="javax.swing.JLabel" name="lblGiamGia">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="UTM Times" size="18" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="jLabel29"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel19">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Component id="jLabel36" min="-2" pref="223" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="lblDiemTV" min="-2" pref="192" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel36" min="-2" pref="45" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="lblDiemTV" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel36">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="e5" green="e5" red="e5" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="UTM Times" size="18" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="&#x110;i&#x1ec3;m th&#xe0;nh vi&#xea;n"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblDiemTV">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="UTM Times" size="18" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="0 VND"/>
                   </Properties>
                 </Component>
               </SubComponents>

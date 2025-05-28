@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import oracle.sql.CharacterSetWithConverter;
 
-public class TheTinDung extends javax.swing.JFrame {
+public class TheTinDungKhungGio extends javax.swing.JFrame {
 
     private String maChuyen, diemDi, diemDen, gioCatCanh, gioHaCanh, giaVe, loaiHinh, maKhuyenMai, maVe, diemThuong;
     int nguoiLon, treEm, emBe, tongSoKH;
@@ -38,17 +38,14 @@ public class TheTinDung extends javax.swing.JFrame {
     private double tongTienSauCung = 0;
     private final JPanel mainPanel;
 
-    public TheTinDung(JPanel mainJPanel,String maChuyen, String diemDi, String diemDen, String gioCatCanh, String gioHaCanh, int nguoiLon, int treEm, int emBe, String giaVe, String loaiHinh, int tongSoKH, double tongGV, double thuePhi, double tongTienSauCung, List<UserHanhKhach> danhSachHanhKhach, String maKhuyenMai, String accId, String diemThuong, double tongDiemT, double tienGiam, double tongTien, double tongPhiDV, double phiChoNgoi, double phiHanhLy, double phiBaoHiem, double phiSuatAn) throws ClassNotFoundException, SQLException {
+    public TheTinDungKhungGio(JPanel mainJPanel, String diemDi, String diemDen, int nguoiLon, int treEm, int emBe,int tongSoKH,double tongTienSauCung, List<UserHanhKhach> danhSachHanhKhach, String accId, double tongPhiDV, double phiBaoHiem, double phiSuatAn) throws ClassNotFoundException, SQLException {
         initComponents();
         this.mainPanel = mainJPanel;
         this.tongTienSauCung = tongTienSauCung;
         this.tongTien = tongTien;
         this.tongPhiDichVu = tongPhiDV;
-        this.phiChoNgoi = phiChoNgoi;
-        this.phiHanhLy = phiHanhLy;
         this.phiBaoHiem = phiBaoHiem;
         this.phiSuatAn = phiSuatAn;
-        this.diemThuong = diemThuong;
         
         this.accId = accId;
         this.tongSoKH = tongSoKH;
@@ -56,46 +53,15 @@ public class TheTinDung extends javax.swing.JFrame {
         String tenThanhPhoDen = TimTinhTP.timTinhTP(diemDen);
         diemDiDen.setText(tenThanhPhoDi + " - " + tenThanhPhoDen );
         
-        String[] chiaTimeDi = ChiaTime.tachTime(gioCatCanh);
-        String[] chiaTimeDen = ChiaTime.tachTime(gioHaCanh);
-        System.out.println(chiaTimeDi[0] + " | " + chiaTimeDen[0] );
         
-        if (chiaTimeDi[0].equals(chiaTimeDen[0])) 
-        {
-            NoiDung.setText(chiaTimeDi[0] + " | " + chiaTimeDi[1] + " - " + chiaTimeDen[1] + " | " + maChuyen);
-        }
         
         for (UserHanhKhach hk : danhSachHanhKhach)
         {
             cbThongTinHK.addItem(hk.getHo() + " " + hk.getTen());
         }
         
-        giaVeBay.setText(giaVe + " VND");
-        String giaVeRaw = giaVe.replace(",", "").replace(" VND", "").trim();
-        
-        // Khởi tạo format cho tiền tệ Việt Nam
-        NumberFormat nf = NumberFormat.getInstance(new Locale("vi", "VN"));
-        String giaVeFormatted = nf.format(tongGV) + " VND";
-        String thuePhiFormatted = nf.format(thuePhi) + " VND";
-        String tongTienFormatted = nf.format(tongTienSauCung) + " VND";
-
-        tongGiaVe.setText(giaVeFormatted);
-
-        lblThuePhi.setText(thuePhiFormatted);
-
-        lblTongTien.setText(tongTienFormatted);
-        
-        lblDiemTV.setText(tongDiemT + " VND");
-        
-        lblGiamGia.setText(tienGiam + "VND");
-        
-        tienDV.setText(tongPhiDichVu + " VND");
-        tienDatCho.setText("Phí đặt chỗ: " + phiChoNgoi + " VND");
-        tienHanhLy.setText("Phí hành lý: " + phiHanhLy + " VND");
-        tienSuatAn.setText("Phí suất ăn: " + phiSuatAn + " VND");
-        tienBaoHiem.setText("Phí bảo hiểm: " + phiBaoHiem + " VND");
-        
-        this.accId =accId;
+        giaVeBay.setText("200.000 VND");
+       lblTongTien.setText(String.valueOf(tongTien));
         btnHuyTT.addActionListener(e -> {
             dispose();
         });
@@ -106,7 +72,7 @@ public class TheTinDung extends javax.swing.JFrame {
             try {
                 maKhachHang = LayMaKH.layMaKHTuAccount(accId);
             } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TheTinDungKhungGio.class.getName()).log(Level.SEVERE, null, ex);
                 return; // thoát nếu lỗi
             }
 
@@ -116,9 +82,9 @@ public class TheTinDung extends javax.swing.JFrame {
             }
 
             try {
-                 maVe = ThemVeMayBay.themVeMayBay(maChuyen, maKhachHang, tongTien, "Vé xác định", "Đã thanh toán");
+                 maVe = ThemVeMayBay.themVeMayBay(maChuyen, maKhachHang, tongTien, "Vé khung giờ", "Đã thanh toán");
             } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TheTinDungKhungGio.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Lỗi khi thêm vé máy bay!");
                 return;
             }
@@ -145,7 +111,7 @@ public class TheTinDung extends javax.swing.JFrame {
                     ThemHanhKhach.themHanhKhach(hoTen, hk.getCccd(), ngaySinhSql, gioiTinhDB, hk.getQuocTich(), hk.getSoDienThoai(),
                                                 hk.getEmail(), maVe, "Economy", giaVeDouble, phiBoS, hk.getViTriGhe());
                 } catch (ClassNotFoundException | SQLException ex) {
-                    Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TheTinDungKhungGio.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, "Lỗi khi thêm hành khách!");
                     return;
                 }
@@ -154,26 +120,12 @@ public class TheTinDung extends javax.swing.JFrame {
                 
             }
             
-            if (this.diemThuong == null || this.diemThuong.trim().isEmpty()) {
-            this.diemThuong = "0"; // hoặc hiển thị cảnh báo cho người dùng
-            }  
-            
-            double diemThuongDouble = Double.parseDouble(diemThuong);
-            try {
-                
-                 TruDiemKhachHang.truDiem(maKhachHang, diemThuongDouble);
-            } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(null, "Lỗi khi trừ điểm!");
-                return;
-            }
-            
             
             try {
                 
                  ThemThanhToan.themThanhToan(maVe, maKhuyenMai, tongTien,"Ví điện tử","Đang xử lý");
             } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TheTinDungKhungGio.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Lỗi khi thêm thanh toán!");
                 return;
             }
@@ -184,9 +136,9 @@ public class TheTinDung extends javax.swing.JFrame {
             try {
                 setForm(new VeCuaToiForm(mainPanel, this.accId));
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TheTinDungKhungGio.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
-                Logger.getLogger(TheTinDung.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TheTinDungKhungGio.class.getName()).log(Level.SEVERE, null, ex);
             }
             });
         
@@ -215,29 +167,14 @@ public class TheTinDung extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         giaVeBay = new javax.swing.JLabel();
         diemDiDen = new javax.swing.JLabel();
-        NoiDung = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        tongGiaVe = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel30 = new javax.swing.JLabel();
-        lblThuePhi = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         tienDV = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         lblTongTien = new javax.swing.JLabel();
-        tienDatCho = new javax.swing.JLabel();
-        tienHanhLy = new javax.swing.JLabel();
         tienSuatAn = new javax.swing.JLabel();
         tienBaoHiem = new javax.swing.JLabel();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel34 = new javax.swing.JLabel();
-        lblGiamGia = new javax.swing.JLabel();
-        jPanel19 = new javax.swing.JPanel();
-        jLabel36 = new javax.swing.JLabel();
-        lblDiemTV = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -294,7 +231,7 @@ public class TheTinDung extends javax.swing.JFrame {
         jPanel11.setBackground(new java.awt.Color(174, 226, 250));
 
         jLabel19.setFont(new java.awt.Font("UTM Nyala", 0, 20)); // NOI18N
-        jLabel19.setText("Chuyến đi");
+        jLabel19.setText("Tiền cọc");
 
         giaVeBay.setFont(new java.awt.Font("UTM Nyala", 1, 22)); // NOI18N
         giaVeBay.setForeground(new java.awt.Color(255, 0, 51));
@@ -323,61 +260,6 @@ public class TheTinDung extends javax.swing.JFrame {
 
         diemDiDen.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
         diemDiDen.setText("Tp. Hồ Chí Minh - Hà Nội");
-
-        NoiDung.setFont(new java.awt.Font("UTM Times", 0, 14)); // NOI18N
-        NoiDung.setText("T5,  24/04/2025 | 06:00 - 08:20 | M1234 | Eco");
-
-        jLabel23.setBackground(new java.awt.Color(229, 229, 229));
-        jLabel23.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
-        jLabel23.setText("Giá vé");
-
-        tongGiaVe.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
-        tongGiaVe.setText("jLabel29");
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tongGiaVe, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(tongGiaVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jLabel30.setBackground(new java.awt.Color(229, 229, 229));
-        jLabel30.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
-        jLabel30.setText("Thuế, phí");
-
-        lblThuePhi.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
-        lblThuePhi.setText("jLabel29");
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblThuePhi, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(lblThuePhi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
 
         jLabel32.setBackground(new java.awt.Color(229, 229, 229));
         jLabel32.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
@@ -433,14 +315,6 @@ public class TheTinDung extends javax.swing.JFrame {
                 .addComponent(lblTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        tienDatCho.setFont(new java.awt.Font("UTM Times", 0, 16)); // NOI18N
-        tienDatCho.setForeground(new java.awt.Color(51, 51, 51));
-        tienDatCho.setText("Phí đặt chỗ");
-
-        tienHanhLy.setFont(new java.awt.Font("UTM Times", 0, 16)); // NOI18N
-        tienHanhLy.setForeground(new java.awt.Color(51, 51, 51));
-        tienHanhLy.setText("Phí hành lý");
-
         tienSuatAn.setFont(new java.awt.Font("UTM Times", 0, 16)); // NOI18N
         tienSuatAn.setForeground(new java.awt.Color(51, 51, 51));
         tienSuatAn.setText("Phí suất ăn");
@@ -448,58 +322,6 @@ public class TheTinDung extends javax.swing.JFrame {
         tienBaoHiem.setFont(new java.awt.Font("UTM Times", 0, 16)); // NOI18N
         tienBaoHiem.setForeground(new java.awt.Color(51, 51, 51));
         tienBaoHiem.setText("Phí bảo hiểm");
-
-        jLabel34.setBackground(new java.awt.Color(229, 229, 229));
-        jLabel34.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
-        jLabel34.setText("Giảm giá");
-
-        lblGiamGia.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
-        lblGiamGia.setText("jLabel29");
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(lblGiamGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jLabel36.setBackground(new java.awt.Color(229, 229, 229));
-        jLabel36.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
-        jLabel36.setText("Điểm thành viên");
-
-        lblDiemTV.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
-        lblDiemTV.setText("0 VND");
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblDiemTV, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(lblDiemTV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -513,25 +335,10 @@ public class TheTinDung extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(tienHanhLy, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                                    .addComponent(tienDatCho, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tienSuatAn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tienBaoHiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(diemDiDen, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(NoiDung, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(diemDiDen, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tienSuatAn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tienBaoHiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(cbThongTinHK, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -547,27 +354,13 @@ public class TheTinDung extends javax.swing.JFrame {
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(diemDiDen, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(NoiDung)
-                .addGap(20, 20, 20)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(34, 34, 34)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tienDatCho, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tienSuatAn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tienHanhLy, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tienBaoHiem, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tienSuatAn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(tienBaoHiem, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -713,7 +506,7 @@ public class TheTinDung extends javax.swing.JFrame {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHuyTT, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXacNhanTT, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -771,7 +564,6 @@ public class TheTinDung extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel NoiDung;
     private javax.swing.JButton btnHuyTT;
     private javax.swing.JButton btnXacNhanTT;
     private javax.swing.JComboBox<String> cbThongTinHK;
@@ -782,13 +574,9 @@ public class TheTinDung extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -797,12 +585,8 @@ public class TheTinDung extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField jTextField1;
@@ -810,15 +594,9 @@ public class TheTinDung extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private com.toedter.calendar.JYearChooser jYearChooser1;
-    private javax.swing.JLabel lblDiemTV;
-    private javax.swing.JLabel lblGiamGia;
-    private javax.swing.JLabel lblThuePhi;
     private javax.swing.JLabel lblTongTien;
     private javax.swing.JLabel tienBaoHiem;
     private javax.swing.JLabel tienDV;
-    private javax.swing.JLabel tienDatCho;
-    private javax.swing.JLabel tienHanhLy;
     private javax.swing.JLabel tienSuatAn;
-    private javax.swing.JLabel tongGiaVe;
     // End of variables declaration//GEN-END:variables
 }

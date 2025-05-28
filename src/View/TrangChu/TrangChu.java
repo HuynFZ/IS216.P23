@@ -2,12 +2,15 @@
 package View.TrangChu;
 
 
+import View.DangKyVaDangNhap;
+import View.DangNhapNguoiDung;
 import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class TrangChu extends javax.swing.JFrame {
@@ -96,9 +99,22 @@ public class TrangChu extends javax.swing.JFrame {
                } catch (SQLException ex) {
                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
                }
+
+           } else if (index == 6)
+           {
+                int choice = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất?", "Xác nhận đăng xuất", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    // Đóng form TrangChu
+                    dispose();
+                    
+                    DangNhapNguoiDung DangNhapFrame = new DangNhapNguoiDung();
+                    DangNhapFrame.setVisible(true);
+                    DangNhapFrame.pack();
+                    DangNhapFrame.setLocationRelativeTo(null);
+                }
            } else
            {
-                   
+               
            }
         });
        setForm(new TrangChuForm());

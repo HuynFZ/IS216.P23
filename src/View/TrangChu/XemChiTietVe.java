@@ -101,7 +101,7 @@ public class XemChiTietVe extends javax.swing.JPanel {
         lblTongGiaVe.setText(String.valueOf(tongGiaVe));
         
         double thuePhi = tongGiaVe * 0.1;
-        
+
         lblThuePhi.setText(String.valueOf(thuePhi));
         
         double giaTri = LayGiaTriKM.layGiaTriKM(maVe);
@@ -184,6 +184,7 @@ public class XemChiTietVe extends javax.swing.JPanel {
         gbc.gridx = 1;
         txtGioiTinh.setFont(font);  // Thay đổi font chữ cho combo box
         txtGioiTinh.setText(hk.getGioiTinh());
+        txtGioiTinh.setEditable(false);
         panel.add(txtGioiTinh, gbc);
 
         gbc.gridx = 2;
@@ -193,6 +194,7 @@ public class XemChiTietVe extends javax.swing.JPanel {
         gbc.gridx = 3;
         txtHo.setFont(font);  // Thay đổi font chữ cho text field
         txtHo.setText(hk.getHo());
+        txtHo.setEditable(false);
         panel.add(txtHo, gbc);
 
         gbc.gridx = 4;
@@ -202,6 +204,7 @@ public class XemChiTietVe extends javax.swing.JPanel {
         gbc.gridx = 5;
         txtTen.setFont(font);
         txtTen.setText(hk.getTen());
+        txtTen.setEditable(false);
         panel.add(txtTen, gbc);
 
         
@@ -214,6 +217,7 @@ public class XemChiTietVe extends javax.swing.JPanel {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String ngaySinhStr = sdf.format(hk.getNgaySinh());
         txtNgaySinh.setText(ngaySinhStr);
+        txtNgaySinh.setEditable(false);
         panel.add(txtNgaySinh, gbc);
 
         
@@ -224,6 +228,7 @@ public class XemChiTietVe extends javax.swing.JPanel {
         gbc.gridx = 3;
         txtCCCD.setFont(font);
         txtCCCD.setText(hk.getCccd());
+        txtCCCD.setEditable(false);
         panel.add(txtCCCD, gbc);
         
         /*
@@ -242,6 +247,7 @@ public class XemChiTietVe extends javax.swing.JPanel {
         gbc.gridx = 1;
         txtQuocTich.setFont(font);
         txtQuocTich.setText(hk.getQuocTich());
+        txtQuocTich.setEditable(false);
         panel.add(txtQuocTich, gbc);
         
         gbc.gridx = 2; gbc.gridy = 2;
@@ -251,6 +257,7 @@ public class XemChiTietVe extends javax.swing.JPanel {
         gbc.gridx = 3;
         txtSDT.setFont(font);
         txtSDT.setText(hk.getSoDienThoai());
+        txtSDT.setEditable(false);
         panel.add(txtSDT, gbc);
         
         gbc.gridx = 4; gbc.gridy = 2;
@@ -260,15 +267,17 @@ public class XemChiTietVe extends javax.swing.JPanel {
         gbc.gridx = 5;
         txtEmail.setFont(font);
         txtEmail.setText(hk.getEmail());
+        txtEmail.setEditable(false);
         panel.add(txtEmail, gbc);
         
         gbc.gridx = 0; gbc.gridy = 3;
         JLabel lblViTriGhe = new JLabel("Vị trí ghế:");
         lblEmail.setFont(labelFont);
-        panel.add(lblEmail, gbc);
+        panel.add(lblViTriGhe, gbc);
         gbc.gridx = 1;
         txtViTriGhe.setFont(font);
         txtViTriGhe.setText(hk.getViTriGhe());
+        txtViTriGhe.setEditable(false);
         panel.add(txtViTriGhe, gbc);
 
         // Thêm chiều rộng cho các JTextField để căn lề
@@ -366,6 +375,7 @@ public class XemChiTietVe extends javax.swing.JPanel {
         bangThongTin = new javax.swing.JTable();
         thanhTruotNhapTT = new javax.swing.JScrollPane();
         NhapThongTin = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
         quayLai = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
@@ -419,6 +429,8 @@ public class XemChiTietVe extends javax.swing.JPanel {
         jScrollPane1.setViewportView(bangThongTin);
 
         NhapThongTin.setBackground(new java.awt.Color(255, 255, 255));
+        NhapThongTin.setViewportView(jScrollPane2);
+
         thanhTruotNhapTT.setViewportView(NhapThongTin);
 
         quayLai.setBackground(new java.awt.Color(255, 255, 0));
@@ -737,9 +749,9 @@ public class XemChiTietVe extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(thanhTruotNhapTT)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(thanhTruotNhapTT, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -799,8 +811,6 @@ public class XemChiTietVe extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -810,14 +820,12 @@ public class XemChiTietVe extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblDichVu1;
-    private javax.swing.JLabel lblDichVu2;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblGiamGia;
     private javax.swing.JLabel lblPhiDV;
     private javax.swing.JLabel lblThuePhi;
