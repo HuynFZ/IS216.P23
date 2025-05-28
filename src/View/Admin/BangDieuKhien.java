@@ -2,9 +2,7 @@
 package View.Admin;
 
 import java.awt.Color;
-
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -12,10 +10,6 @@ public class BangDieuKhien extends javax.swing.JPanel {
 
     public BangDieuKhien() {
         initComponents();
-        
-        
-        
-        
 //        card1.setData(new PrTheTongHop(new ImageIcon(getClass().getResource("/com/raven/icon/stock.png")), "Stock Total", "$200000", "Increased by 60%"));
 //        card2.setData(new PrTheTongHop(new ImageIcon(getClass().getResource("/com/raven/icon/profit.png")), "Total Profit", "$15000", "Increased by 25%"));
 //        card3.setData(new PrTheTongHop(new ImageIcon(getClass().getResource("/com/raven/icon/flag.png")), "Unique Visitors", "$300000", "Increased by 70%"));

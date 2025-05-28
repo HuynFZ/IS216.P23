@@ -2,8 +2,6 @@
 package Process;
 
 import ConnectDB.ConnectionUtils;
-
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -13,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.sql.Types;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -40,28 +37,13 @@ public class UserJava {
             }
 
             if (userId != -1) {
-                CallableStatement cs = con.prepareCall("{? = call FN_TAO_MAKH}");
-                cs.registerOutParameter(1, Types.VARCHAR);
-                cs.execute();
-                String maKH = cs.getString(1);
-
-                String insertAccount = "INSERT INTO ACCOUNT(USER_ID, USERNAME, PASSWORD_HASH, MaKhachHang) VALUES(?, ?, ?, ?)";
+                String insertAccount = "INSERT INTO ACCOUNT(USER_ID, USERNAME, PASSWORD_HASH) VALUES(?, ?, ?)";
                 PreparedStatement psAccount = con.prepareStatement(insertAccount);
                 psAccount.setInt(1, userId);
                 psAccount.setString(2, username);
                 psAccount.setString(3, passwordHash);
-                psAccount.setString(4, maKH);
 
                 i = psAccount.executeUpdate();
-                
-                // Thêm vào bảng khách hàng
-                String insertKH = "INSERT INTO KHACH_HANG(MaKhachHang, HoTen, Email, ThoiGianCapNhatDT) VALUES (?, ?, ?, SYSTIMESTAMP)";
-                PreparedStatement psKH = con.prepareStatement(insertKH);
-                psKH.setString(1, maKH);
-                psKH.setString(2, fullname);
-                psKH.setString(3, email);
-                psKH.executeUpdate();
-                
                 con.commit(); // Commit nếu thành công
             } else {
                 con.rollback(); // rollback nếu không lấy được userId
