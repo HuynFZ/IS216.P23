@@ -101,7 +101,7 @@ public class XemChiTietVe extends javax.swing.JPanel {
         lblTongGiaVe.setText(String.valueOf(tongGiaVe));
         
         double thuePhi = tongGiaVe * 0.1;
-        
+
         lblThuePhi.setText(String.valueOf(thuePhi));
         
         double giaTri = LayGiaTriKM.layGiaTriKM(maVe);
@@ -248,7 +248,6 @@ public class XemChiTietVe extends javax.swing.JPanel {
         txtQuocTich.setFont(font);
         txtQuocTich.setText(hk.getQuocTich());
         txtQuocTich.setEditable(false);
-        
         panel.add(txtQuocTich, gbc);
         
         gbc.gridx = 2; gbc.gridy = 2;
@@ -819,6 +818,7 @@ public class XemChiTietVe extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel3;

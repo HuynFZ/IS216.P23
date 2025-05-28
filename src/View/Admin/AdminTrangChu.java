@@ -57,6 +57,7 @@ public class AdminTrangChu extends javax.swing.JFrame {
                     DangNhapFrame.setLocationRelativeTo(null);
                 }
            } else 
+
            {
            }
         });
