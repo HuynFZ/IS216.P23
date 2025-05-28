@@ -31,9 +31,15 @@ public class AdminTrangChu extends javax.swing.JFrame {
            } else if (index == 3)
            {
                setForm(new QLNhanVienForm());
-           } else
+           } else if (index == 4)
            {
                
+           } else if (index == 5)
+           {
+               
+           } else if (index == 6)
+           {
+               setForm(new BaoCaoLamViecForm());
            }
         });
        setForm(new BangDieuKhien());
