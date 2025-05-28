@@ -271,7 +271,7 @@ public class DangNhapNguoiDung extends javax.swing.JFrame {
             }
             else
             {
-                AdminTrangChu admin = new AdminTrangChu();
+                AdminTrangChu admin = new AdminTrangChu(accid);
                 admin.setVisible(true);
                 admin.pack();
                 admin.setExtendedState(JFrame.MAXIMIZED_BOTH);

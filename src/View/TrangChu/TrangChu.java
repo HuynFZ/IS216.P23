@@ -1,21 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View.TrangChu;
 
 
+import View.DangKyVaDangNhap;
+import View.DangNhapNguoiDung;
 import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Huy Nguyen
- */
+
 public class TrangChu extends javax.swing.JFrame {
 
     
@@ -85,14 +82,38 @@ public class TrangChu extends javax.swing.JFrame {
                }
            } else if (index == 2)
            {
-               setForm(new VeCuaToiForm(mainPanel, accId));
+               try {
+                   setForm(new VeCuaToiForm(mainPanel, accId));
+               } catch (ClassNotFoundException ex) {
+                   Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+               } catch (SQLException ex) {
+                   Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+               }
            }
            else if (index == 5)
            {
-               setForm(new TaiKhoanForm(mainPanel, accId));
+               try {
+                   setForm(new TaiKhoanForm(mainPanel, accId));
+               } catch (ClassNotFoundException ex) {
+                   Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+               } catch (SQLException ex) {
+                   Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           } else if (index == 6)
+           {
+                int choice = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất?", "Xác nhận đăng xuất", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    // Đóng form TrangChu
+                    dispose();
+                    
+                    DangNhapNguoiDung DangNhapFrame = new DangNhapNguoiDung();
+                    DangNhapFrame.setVisible(true);
+                    DangNhapFrame.pack();
+                    DangNhapFrame.setLocationRelativeTo(null);
+                }
            } else
            {
-                   
+               
            }
         });
        setForm(new TrangChuForm());

@@ -94,6 +94,16 @@ public class DatVeForm extends javax.swing.JPanel {
                 }
         });
         
+        btnVeKhungGio.addActionListener(evt -> {
+            try {
+                setForm (new DatVeKhungGioForm(mainPanel, accId));
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DatVeForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(DatVeForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -128,6 +138,7 @@ public class DatVeForm extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         xacNhanDatVe = new javax.swing.JButton();
         noiDungVe = new javax.swing.JLabel();
+        btnVeKhungGio = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -270,24 +281,38 @@ public class DatVeForm extends javax.swing.JPanel {
 
         noiDungVe.setFont(new java.awt.Font("UTM Times", 0, 18)); // NOI18N
 
+        btnVeKhungGio.setBackground(new java.awt.Color(255, 153, 255));
+        btnVeKhungGio.setFont(new java.awt.Font("UTM Times", 1, 20)); // NOI18N
+        btnVeKhungGio.setText("Vé khung giờ");
+        btnVeKhungGio.setPreferredSize(new java.awt.Dimension(116, 37));
+        btnVeKhungGio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVeKhungGioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(noiDungVe, javax.swing.GroupLayout.PREFERRED_SIZE, 878, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
+                .addComponent(btnVeKhungGio, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(noiDungVe, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xacNhanDatVe, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(noiDungVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(xacNhanDatVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVeKhungGio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(noiDungVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(xacNhanDatVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -344,7 +369,7 @@ public class DatVeForm extends javax.swing.JPanel {
                                                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGap(49, 49, 49)
                                                     .addComponent(timChuyenBayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))))))))
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -391,7 +416,7 @@ public class DatVeForm extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(timChuyenBayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -474,6 +499,10 @@ public class DatVeForm extends javax.swing.JPanel {
     private void xacNhanDatVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xacNhanDatVeActionPerformed
         
     }//GEN-LAST:event_xacNhanDatVeActionPerformed
+
+    private void btnVeKhungGioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVeKhungGioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVeKhungGioActionPerformed
     
     private void setForm (JComponent com)
     {
@@ -698,6 +727,7 @@ public class DatVeForm extends javax.swing.JPanel {
     private javax.swing.JRadioButton MotChieu;
     private javax.swing.JLabel NgayVe;
     private javax.swing.JTable bangChuyenBay;
+    private javax.swing.JButton btnVeKhungGio;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField diemDenText;
     private javax.swing.JComboBox<String> jComboBox1;

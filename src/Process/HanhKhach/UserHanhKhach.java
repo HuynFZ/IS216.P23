@@ -1,8 +1,8 @@
 
 package Process.HanhKhach;
 
+import java.sql.Timestamp;
 import java.util.Date;
-import java.util.logging.Logger;
 
 public class UserHanhKhach {
     private String loaiKhachHang; // "Người lớn", "Trẻ em", "Em bé"
@@ -22,6 +22,8 @@ public class UserHanhKhach {
     private String maBaoHiem;
     private String soDienThoai;
     private String email;
+    private String maHanhKhach;
+    private double phiBoSung;
 
     public UserHanhKhach(String loaiKhachHang, String gioiTinh, String ho, String ten, Date ngaySinh, String quocTich, String cccd, Date ngayHetHanCCCD, String maDVGhe, String viTriGhe, double tienGhe, String maGoiHanhLy, double phiHanhly, String maSuatAn, String maBaoHiem, String soDienThoai, String email) {
         this.loaiKhachHang = loaiKhachHang;
@@ -42,6 +44,81 @@ public class UserHanhKhach {
         this.soDienThoai = soDienThoai;
         this.email = email;
     }
+
+    public UserHanhKhach(String loaiKhachHang, String gioiTinh, String ho, String ten, Date ngaySinh, String quocTich, String cccd, Date ngayHetHanCCCD, String maDVGhe, String viTriGhe, double tienGhe, String maGoiHanhLy, double phiHanhly, String maSuatAn, String maBaoHiem, String soDienThoai, String email, String maHanhKhach) {
+        this.loaiKhachHang = loaiKhachHang;
+        this.gioiTinh = gioiTinh;
+        this.ho = ho;
+        this.ten = ten;
+        this.ngaySinh = ngaySinh;
+        this.quocTich = quocTich;
+        this.cccd = cccd;
+        this.ngayHetHanCCCD = ngayHetHanCCCD;
+        this.maDVGhe = maDVGhe;
+        this.viTriGhe = viTriGhe;
+        this.tienGhe = tienGhe;
+        this.maGoiHanhLy = maGoiHanhLy;
+        this.phiHanhly = phiHanhly;
+        this.maSuatAn = maSuatAn;
+        this.maBaoHiem = maBaoHiem;
+        this.soDienThoai = soDienThoai;
+        this.email = email;
+        this.maHanhKhach = maHanhKhach;
+    }
+
+    public UserHanhKhach(String maHanhKhach, String gioiTinh, String hoTen, Date ngaySinh, String quocTich,
+                         String cccd, String sdt, String email, double phiBoSung, String viTriGhe) {
+        this.maHanhKhach = maHanhKhach;
+        this.gioiTinh = gioiTinh;
+
+        // Tách họ tên
+        tachHoTen(hoTen);
+
+        this.ngaySinh = ngaySinh;
+        this.quocTich = quocTich;
+        this.cccd = cccd;
+        this.soDienThoai = sdt;
+        this.email = email;
+        this.phiBoSung = phiBoSung;
+        this.viTriGhe = viTriGhe;
+    }
+
+    private void tachHoTen(String hoTen) {
+        if (hoTen == null || hoTen.trim().isEmpty()) {
+            this.ho = "";
+            this.ten = "";
+            return;
+        }
+
+        String[] parts = hoTen.trim().split("\\s+");
+        if (parts.length == 1) {
+            this.ho = "";
+            this.ten = parts[0];
+        } else {
+            this.ten = parts[parts.length - 1];
+            this.ho = String.join(" ", java.util.Arrays.copyOfRange(parts, 0, parts.length - 1));
+        }
+    }
+
+    public double getPhiBoSung() {
+        return phiBoSung;
+    }
+
+    public void setPhiBoSung(double phiBoSung) {
+        this.phiBoSung = phiBoSung;
+    }
+    
+    
+
+    public String getMaHanhKhach() {
+        return maHanhKhach;
+    }
+
+    public void setMaHanhKhach(String maHanhKhach) {
+        this.maHanhKhach = maHanhKhach;
+    }
+    
+    
 
     public String getEmail() {
         return email;
