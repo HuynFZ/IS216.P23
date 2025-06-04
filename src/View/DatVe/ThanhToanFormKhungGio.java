@@ -57,6 +57,7 @@ public class ThanhToanFormKhungGio extends javax.swing.JPanel {
         String tenThanhPhoDi = TimTinhTP.timTinhTP(diemDi);
         String tenThanhPhoDen = TimTinhTP.timTinhTP(diemDen);
         diemDiDen.setText(tenThanhPhoDi + " - " + tenThanhPhoDen );
+        lblDichVu.setText(String.valueOf(tongPhiDichVu) + " VND");
 
         
         
@@ -311,11 +312,11 @@ public class ThanhToanFormKhungGio extends javax.swing.JPanel {
 
         lblBaoHiem.setFont(new java.awt.Font("UTM Times", 0, 16)); // NOI18N
         lblBaoHiem.setForeground(new java.awt.Color(51, 51, 51));
-        lblBaoHiem.setText("Phí bảo hiểm");
+        lblBaoHiem.setText("0 VND");
 
         lblSuatAn.setFont(new java.awt.Font("UTM Times", 0, 16)); // NOI18N
         lblSuatAn.setForeground(new java.awt.Color(51, 51, 51));
-        lblSuatAn.setText("Phí suất ăn");
+        lblSuatAn.setText("0 VND");
 
         tienBaoHiem1.setFont(new java.awt.Font("UTM Times", 0, 16)); // NOI18N
         tienBaoHiem1.setForeground(new java.awt.Color(51, 51, 51));
@@ -337,7 +338,6 @@ public class ThanhToanFormKhungGio extends javax.swing.JPanel {
                         .addGap(19, 19, 19)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGap(0, 0, 0)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tienSuatAn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tienBaoHiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))

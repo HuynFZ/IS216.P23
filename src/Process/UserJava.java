@@ -51,8 +51,8 @@ public class UserJava {
                 psAccount.setString(2, username);
                 psAccount.setString(3, passwordHash);
                 psAccount.setString(4, maKH);
-
-                i = psAccount.executeUpdate();
+                psAccount.executeUpdate();
+                //i = userId;
                 
                 // Thêm vào bảng khách hàng
                 String insertKH = "INSERT INTO KHACH_HANG(MaKhachHang, HoTen, Email, ThoiGianCapNhatDT) VALUES (?, ?, ?, SYSTIMESTAMP)";
@@ -61,8 +61,24 @@ public class UserJava {
                 psKH.setString(2, fullname);
                 psKH.setString(3, email);
                 psKH.executeUpdate();
+               
                 
                 con.commit(); // Commit nếu thành công
+                
+                String select = "SELECT ACCOUNT_ID FROM ACCOUNT WHERE USER_ID = ?";
+                PreparedStatement psAC = con.prepareStatement(select);
+                psAC.setInt(1, userId);
+
+                ResultSet rsAC = psAC.executeQuery();
+                if (rsAC.next()) {
+                    int accountId = rsAC.getInt("ACCOUNT_ID");
+                    i = accountId;
+                    System.out.println("Tìm thấy ACCOUNT_ID: " + accountId);
+                    // Bạn có thể dùng accountId này để tạo khách hàng, hoặc thao tác tiếp
+                } else {
+                    System.out.println("Không tìm thấy ACCOUNT_ID cho USER_ID = " + userId);
+                }
+
             } else {
                 con.rollback(); // rollback nếu không lấy được userId
             }
@@ -77,9 +93,11 @@ public class UserJava {
                 i = -2000;
             } else {
                 JOptionPane.showMessageDialog(null, "Lỗi SQL: " + sqlEx.getMessage());
+                i = -100;
             }
         } else {
             JOptionPane.showMessageDialog(null, "Lỗi: " + e.getMessage());
+            i = -100;
         }
 
         if (con != null) con.rollback();
@@ -96,6 +114,22 @@ public class UserJava {
     }
     return i;
 }
+    
+     public int themRole(int userid) throws SQLException {
+        Connection con = null;
+        try {
+            con = ConnectionUtils.getMyConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserJava.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String insertRole = "INSERT INTO ACCOUNT_ASSIGN_ROLE_GROUP(ACCOUNT_ID, ROLE_GROUP_ID) VALUES (?, 1)";
+        PreparedStatement psRole = con.prepareStatement(insertRole);
+        psRole.setInt(1, userid);
+        psRole.executeUpdate();
+        return 0;
+    }
+    
+    
 
     public UserResponse dangNhapTK(String username, String passwordHash)
     {

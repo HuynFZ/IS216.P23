@@ -33,4 +33,28 @@ public class SanBayList {
 
         return danhSach;
     }
+
+    public static String timMaSanBayTuGoiY(String goiYCanTim) throws ClassNotFoundException, SQLException {
+    Connection con = null;
+    try {
+        con = ConnectionUtils.getMyConnection();
+        String sql = "SELECT MASANBAY, TENSANBAY || ' - ' || TINHTHANHPHO AS GOIY FROM SAN_BAY";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            String goiY = rs.getString("GOIY");
+            if (goiY.equalsIgnoreCase(goiYCanTim.trim())) {
+                return rs.getString("MASANBAY");
+            }
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        if (con != null) con.close();
+    }
+
+    return null; // Không tìm thấy
+}
 }

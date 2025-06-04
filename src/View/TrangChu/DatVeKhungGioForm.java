@@ -48,8 +48,26 @@ public class DatVeKhungGioForm extends javax.swing.JPanel {
                 int treEm = (int) soTreEm.getValue();
                 int emBe = (int) soEmBe.getValue();
 
-                String diemDi = DiemDiText.getText();
-                String diemDen = diemDenText.getText();
+                String diemDiTen = DiemDiText.getText();
+                String diemDenTen = diemDenText.getText();
+                
+                String diemDi = null;
+                try {
+                    diemDi = SanBayList.timMaSanBayTuGoiY(diemDiTen);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(DatVeKhungGioForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(DatVeKhungGioForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                String diemDen = null;
+                try {
+                    diemDen = SanBayList.timMaSanBayTuGoiY(diemDenTen);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(DatVeKhungGioForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(DatVeKhungGioForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 Date ngayDi = JDNgayDi.getDate();
 

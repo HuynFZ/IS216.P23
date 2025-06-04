@@ -5,22 +5,40 @@ import Process.ChiaTime;
 import Process.HanhKhach.ThemHanhKhach;
 import Process.VeMayBay.ThemVeMayBay;
 import Process.HanhKhach.UserHanhKhach;
+import Process.KhachHang.LayEmailKH;
 import Process.KhachHang.LayMaKH;
 import Process.KhachHang.TruDiemKhachHang;
 import Process.SanBay.TimTinhTP;
 import Process.ThanhToan.ThemThanhToan;
 import View.TrangChu.VeCuaToiForm;
+import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import oracle.sql.CharacterSetWithConverter;
 
 public class TheTinDung extends javax.swing.JFrame {
@@ -179,7 +197,26 @@ public class TheTinDung extends javax.swing.JFrame {
             }
 
             JOptionPane.showMessageDialog(null,"Bạn đã thanh toán thành công");
+            String filePart = null;
+            String emailKH = null;
+            try {
+                emailKH = LayEmailKH.layEmailKHTuAccount(accId);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ThanhToanNganHang.class.getName()).log(Level.SEVERE, null, ex);
+                return; // thoát nếu lỗi
+            }
 
+            if (emailKH == null || maKhachHang.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy mã khách hàng!");
+                return;
+            }
+
+            filePart = exportVeMayBayToPDF(maChuyen, diemDi, diemDen, gioCatCanh, gioHaCanh,loaiHinh,danhSachHanhKhach);
+                        boolean checkem = false;
+            EmailService mailsender = new EmailService();
+            checkem = mailsender.sendEmailWithPdfAttachment(emailKH, "Vé khách hàng đã thanh toán",
+                                    "<h3>Xin chào,</h3><p>Vé máy bay của bạn được gửi kèm file PDF bên dưới.</p>",
+                                    filePart);
             dispose();
             try {
                 setForm(new VeCuaToiForm(mainPanel, this.accId));
@@ -192,6 +229,120 @@ public class TheTinDung extends javax.swing.JFrame {
         
 
 
+    }
+    
+    private static String safe(Object o) {   // thêm hàm này trong class
+        return o == null ? "" : o.toString();
+        }
+
+
+        private String exportVeMayBayToPDF(String maChuyen, String diemDi, String diemDen, 
+                                      String gioCatCanh, String gioHaCanh, String loaiHinh, 
+                                      List<UserHanhKhach> danhSachHanhKhach) {
+        // Tạo tên file theo thời gian
+        String suggestedFileName = "VeMayBay_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".pdf";
+        // Lấy thư mục tạm của hệ thống
+        String tempDir = System.getProperty("java.io.tmpdir");
+        String filePath = tempDir + File.separator + suggestedFileName;
+
+        try (PdfWriter writer = new PdfWriter(filePath)) {
+            PdfDocument pdf = new PdfDocument(writer);
+            com.itextpdf.layout.Document document =
+                    new com.itextpdf.layout.Document(pdf, PageSize.A5.rotate());
+            document.setMargins(20, 20, 20, 20);
+
+            PdfFont font = PdfFontFactory.createFont("fonts/times.ttf", PdfEncodings.IDENTITY_H);
+
+            document.add(new Paragraph("VÉ MÁY BAY ĐIỆN TỬ")
+                    .setFont(font).setFontSize(18).setBold()
+                    .setTextAlignment(TextAlignment.CENTER));
+
+            document.add(new Paragraph(
+                    "Ngày tạo vé: " +
+                            new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))
+                    .setFont(font).setFontSize(10).setTextAlignment(TextAlignment.CENTER));
+            document.add(new Paragraph("\n"));
+
+            /* ---------- Thông tin chuyến bay ---------- */
+            Table info = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
+            info.addCell(new Cell().add(new Paragraph("Mã chuyến:").setFont(font).setBold()));
+            info.addCell(new Cell().add(new Paragraph(safe(maChuyen)).setFont(font)));
+
+            info.addCell(new Cell().add(new Paragraph("Điểm đi - đến:").setFont(font).setBold()));
+            info.addCell(new Cell().add(new Paragraph(
+                    safe(diemDi) + " - " + safe(diemDen)).setFont(font)));
+
+            info.addCell(new Cell().add(new Paragraph("Giờ cất cánh:").setFont(font).setBold()));
+            info.addCell(new Cell().add(new Paragraph(safe(gioCatCanh)).setFont(font)));
+
+            info.addCell(new Cell().add(new Paragraph("Giờ hạ cánh:").setFont(font).setBold()));
+            info.addCell(new Cell().add(new Paragraph(safe(gioHaCanh)).setFont(font)));
+
+            info.addCell(new Cell().add(new Paragraph("Loại hình:").setFont(font).setBold()));
+            info.addCell(new Cell().add(new Paragraph(safe(loaiHinh)).setFont(font)));
+
+            info.addCell(new Cell().add(new Paragraph("Mã vé:").setFont(font).setBold()));
+            info.addCell(new Cell().add(new Paragraph(safe(maVe)).setFont(font)));
+
+            document.add(info);
+            document.add(new Paragraph("\n"));
+
+            /* ---------- Danh sách hành khách ---------- */
+            document.add(new Paragraph("DANH SÁCH HÀNH KHÁCH")
+                    .setFont(font).setBold().setTextAlignment(TextAlignment.CENTER));
+
+            Table hkTable = new Table(UnitValue.createPercentArray(
+                    new float[]{5, 25, 10, 15, 25, 20})).useAllAvailableWidth();
+
+            for (String h : new String[]{"#", "Họ tên", "GT", "Ngày sinh", "Số CCCD", "SĐT"})
+                hkTable.addHeaderCell(new Cell().add(new Paragraph(h).setFont(font).setBold()));
+
+            int stt = 1;
+            for (UserHanhKhach hk : danhSachHanhKhach) {
+                hkTable.addCell(new Cell().add(new Paragraph(String.valueOf(stt++)).setFont(font)));
+                hkTable.addCell(new Cell().add(new Paragraph(
+                        safe(hk.getHo()) + " " + safe(hk.getTen())).setFont(font)));
+                hkTable.addCell(new Cell().add(new Paragraph(safe(hk.getGioiTinh())).setFont(font)));
+                hkTable.addCell(new Cell().add(new Paragraph(
+                        new SimpleDateFormat("dd/MM/yyyy")
+                            .format(hk.getNgaySinh())).setFont(font)));
+                hkTable.addCell(new Cell().add(new Paragraph(safe(hk.getCccd())).setFont(font)));
+                hkTable.addCell(new Cell().add(new Paragraph(safe(hk.getSoDienThoai())).setFont(font)));
+            }
+            document.add(hkTable);
+            document.add(new Paragraph("\n"));
+
+            /* ---------- Chi phí ---------- */
+            NumberFormat nf = NumberFormat.getInstance(new Locale("vi", "VN"));
+            Table cost = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
+            cost.addCell(new Cell().add(new Paragraph("Tổng giá vé").setFont(font)));
+            cost.addCell(new Cell().add(new Paragraph(nf.format(tongTien) + " VND").setFont(font)));
+
+            cost.addCell(new Cell().add(new Paragraph("Tổng phí dịch vụ").setFont(font)));
+            cost.addCell(new Cell().add(new Paragraph(nf.format(tongPhiDichVu) + " VND").setFont(font)));
+
+            cost.addCell(new Cell().add(new Paragraph("Tổng tiền sau cùng").setFont(font).setBold()));
+            cost.addCell(new Cell().add(new Paragraph(nf.format(tongTienSauCung) + " VND")
+                    .setFont(font).setBold()));
+            document.add(cost);
+
+            document.add(new Paragraph("\nCảm ơn quý khách đã sử dụng dịch vụ!\n")
+                    .setFont(font).setTextAlignment(TextAlignment.CENTER));
+
+            document.close();
+
+            // Có thể in log hoặc show dialog nếu cần
+            System.out.println("Đã xuất vé máy bay PDF tại: " + filePath);
+
+            return filePath;  // Trả về đường dẫn file PDF
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                    "Lỗi khi xuất file PDF: " + ex.getMessage(),
+                    "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
     }
     
     private void setForm (JComponent com)

@@ -38,7 +38,7 @@ import java.time.format.DateTimeParseException;
  */
 public class QLChuyenBayForm extends javax.swing.JPanel {
     private final String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private final String DB_USER = "hanghk";
+    private final String DB_USER = "c##QLHHK";
     private final String DB_PASSWORD = "Admin123";
     private java.util.List<String> danhSachMaMayBay = new java.util.ArrayList<>();
     private JPopupMenu suggestionsPopupMenu;
@@ -793,6 +793,7 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
         });
         DanhSachChuyenBayTable.setFont(new java.awt.Font("UTM Centur", 1, 14)); // NOI18N
         DanhSachChuyenBayTable.setForeground(new java.awt.Color(0, 51, 102));
+        DanhSachChuyenBayTable.setRowHeight(35);
         jScrollPane1.setViewportView(DanhSachChuyenBayTable);
 
         thanhTimKiemLabel.setFont(new java.awt.Font("UTM Centur", 1, 24)); // NOI18N

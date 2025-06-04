@@ -108,7 +108,6 @@
                           <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="tienSuatAn" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                                       <Component id="tienBaoHiem1" alignment="0" min="-2" pref="91" max="-2" attributes="0"/>
@@ -403,7 +402,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ph&#xed; b&#x1ea3;o hi&#x1ec3;m"/>
+            <Property name="text" type="java.lang.String" value="0 VND"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblSuatAn">
@@ -414,7 +413,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ph&#xed; su&#x1ea5;t &#x103;n"/>
+            <Property name="text" type="java.lang.String" value="0 VND"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="tienBaoHiem1">

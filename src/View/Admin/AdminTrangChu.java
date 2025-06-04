@@ -35,7 +35,27 @@ public class AdminTrangChu extends javax.swing.JFrame {
            } else if (index == 3)
            {
                setForm(new QLNhanVienForm());
-           } else if (index == 9)        
+           }
+           else if (index == 4)
+           {
+               setForm(new QLKhachHangForm());
+           }
+           else if (index == 5)
+           {
+               setForm(new QLDatVeForm());
+           }
+           else if (index == 6)
+           {
+               setForm(new QLHanhLyForm());
+           }
+           else if (index == 7)
+           {
+               setForm (new PhanCongLamViecForm());
+           } else if (index == 8)
+           {
+               setForm (new BaoCaoLamViecForm());
+           }
+           else if (index == 10)        
            {
                try {
                    setForm(new TaiKhoanNhanVienForm(mainPanel, accId));
@@ -44,7 +64,7 @@ public class AdminTrangChu extends javax.swing.JFrame {
                } catch (SQLException ex) {
                    Logger.getLogger(AdminTrangChu.class.getName()).log(Level.SEVERE, null, ex);
                }
-           } else if (index == 11)
+           } else if (index == 12)
            {
                int choice = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất?", "Xác nhận đăng xuất", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
@@ -89,17 +109,19 @@ public class AdminTrangChu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 1145, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1145, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 1113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 

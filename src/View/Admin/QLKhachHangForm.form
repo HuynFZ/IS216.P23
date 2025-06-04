@@ -70,22 +70,6 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
-                          <Component id="lblHoTen" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                          <Component id="lblStarHoTen" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="139" pref="139" max="-2" attributes="0"/>
-                          <Component id="txtHoTen" min="-2" pref="306" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
-                          <Component id="lblCCCD" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                          <Component id="lblStarCCCD" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="111" pref="111" max="-2" attributes="0"/>
-                          <Component id="txtCCCD" min="-2" pref="307" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
                           <Component id="lblNgaySinh" min="-2" pref="90" max="-2" attributes="0"/>
                           <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                           <Component id="lblStarNgaySinh" min="-2" max="-2" attributes="0"/>
@@ -106,37 +90,37 @@
                           <EmptySpace min="138" pref="138" max="-2" attributes="0"/>
                           <Component id="txtEmail" min="-2" pref="307" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
-                          <Component id="lblDiaChi" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                          <Component id="lblStarDiaChi" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="128" pref="128" max="-2" attributes="0"/>
-                          <Component id="txtDiaChi" min="-2" pref="307" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
-                          <Component id="lblChucVu" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
-                          <Component id="lblStarChucVu" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="128" pref="128" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblLuong" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
+                                  <Component id="lblStarLuongCoBan" min="-2" pref="10" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblChucVu" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                                  <Component id="lblStarChucVu" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblDiaChi" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                  <Component id="lblStarDiaChi" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cmbLoaiKH" alignment="1" pref="307" max="32767" attributes="0"/>
+                                  <Component id="txtQuocTich" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="txtDiemThuong" min="-2" pref="307" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                           <Component id="pnlChucVuCards" min="-2" pref="307" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
-                          <Component id="lblLuong" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
-                          <Component id="lblStarLuongCoBan" min="-2" pref="10" max="-2" attributes="0"/>
-                          <EmptySpace min="77" pref="77" max="-2" attributes="0"/>
-                          <Component id="txtLuong" min="-2" pref="307" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
-                          <Component id="lblPhucLoi" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="141" pref="141" max="-2" attributes="0"/>
-                          <Component id="txtPhucLoi" min="-2" pref="307" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -144,21 +128,33 @@
                                   <Component id="lblStarNgayVaoLam" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="lblNgayVaoLam" min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="lblPhucLoi" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="78" pref="78" max="-2" attributes="0"/>
-                          <Component id="pnlNgayVaoLamCards" min="-2" pref="307" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtHangTV" min="-2" pref="307" max="-2" attributes="0"/>
+                              <Component id="pnlNgayVaoLamCards" min="-2" pref="307" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
-                          <Component id="lblBangCap" min="-2" pref="157" max="-2" attributes="0"/>
-                          <EmptySpace min="52" pref="52" max="-2" attributes="0"/>
-                          <Component id="txtBangCap" min="-2" pref="300" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
-                          <Component id="lblThoiHanBC" min="-2" pref="157" max="-2" attributes="0"/>
-                          <EmptySpace min="55" pref="55" max="-2" attributes="0"/>
-                          <Component id="dcThoiHanBC" min="-2" pref="300" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblCCCD" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                  <Component id="lblStarCCCD" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblHoTen" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                  <Component id="lblStarHoTen" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtHoTen" min="-2" pref="307" max="-2" attributes="0"/>
+                              <Component id="txtCCCD" min="-2" pref="307" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -173,18 +169,17 @@
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="txtSDT" min="-2" pref="307" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="211" max="-2" attributes="0"/>
                                   <Component id="btnHuy" min="-2" pref="66" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Component id="txtSDT" min="-2" pref="307" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -262,7 +257,7 @@
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="lblStarDiaChi" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtDiaChi" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtQuocTich" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -272,6 +267,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblChucVu" min="-2" max="-2" attributes="0"/>
                               <Component id="pnlChucVuCards" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbLoaiKH" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -285,17 +281,20 @@
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="lblStarLuongCoBan" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtLuong" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDiemThuong" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                          <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
                           <Component id="lblPhucLoi" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtPhucLoi" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtHangTV" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblStarNgayVaoLam" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
@@ -306,20 +305,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblBangCap" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtBangCap" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblThoiHanBC" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                          <Component id="dcThoiHanBC" min="-2" pref="32" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnHuy" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnXacNhan" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -335,7 +321,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Th&#xea;m nh&#xe2;n vi&#xea;n"/>
+            <Property name="text" type="java.lang.String" value="Th&#xea;m kh&#xe1;ch h&#xe0;ng"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblMa">
@@ -343,7 +329,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="M&#xe3; nh&#xe2;n vi&#xea;n"/>
+            <Property name="text" type="java.lang.String" value="M&#xe3; kh&#xe1;ch h&#xe0;ng"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblHoTen">
@@ -410,7 +396,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x1ecb;a ch&#x1ec9;"/>
+            <Property name="text" type="java.lang.String" value="Qu&#x1ed1;c t&#x1ecb;ch"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblChucVu">
@@ -418,7 +404,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ch&#x1ee9;c v&#x1ee5;"/>
+            <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i kh&#xe1;ch h&#xe0;ng"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblLuong">
@@ -426,7 +412,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="L&#x1b0;&#x1a1;ng c&#x1a1; b&#x1ea3;n"/>
+            <Property name="text" type="java.lang.String" value="&#x110;i&#x1ec3;m th&#x1b0;&#x1edf;ng"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPhucLoi">
@@ -434,7 +420,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ph&#xfa;c l&#x1ee3;i"/>
+            <Property name="text" type="java.lang.String" value="H&#x1ea1;ng th&#xe0;nh vi&#xea;n"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtMa">
@@ -469,24 +455,24 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCCCDActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDiaChi">
+        <Component class="javax.swing.JTextField" name="txtQuocTich">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="18" style="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDiaChiActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQuocTichActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtLuong">
+        <Component class="javax.swing.JTextField" name="txtDiemThuong">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="18" style="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLuongActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDiemThuongActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblNgayVaoLam">
@@ -494,24 +480,24 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ng&#xe0;y v&#xe0;o l&#xe0;m"/>
+            <Property name="text" type="java.lang.String" value="Th&#x1edd;i h&#x1ea1;n TV"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPhucLoi">
+        <Component class="javax.swing.JTextField" name="txtHangTV">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="18" style="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPhucLoiActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtHangTVActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="pnlNgayVaoLamCards">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="txtNgayVaoLamView">
+            <Component class="javax.swing.JTextField" name="txtThoiHanTV">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -519,7 +505,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNgayVaoLamViewActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtThoiHanTVActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -527,7 +513,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="dcNgayVaoLamEdit">
+            <Component class="com.toedter.calendar.JDateChooser" name="dcHanTV">
               <Properties>
                 <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -640,40 +626,6 @@
         <Container class="javax.swing.JPanel" name="pnlChucVuCards">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JComboBox" name="cmbChucVuEdit">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="UTM Centur" size="18" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Phi c&#xf4;ng&quot;, &quot;Ti&#x1ebf;p vi&#xea;n&quot;, &quot;K&#x1ef9; thu&#x1ead;t vi&#xea;n&quot;, &quot;Nh&#xe2;n vi&#xea;n b&#x1ea3;o v&#x1ec7;&quot;, &quot;Nh&#xe2;n vi&#xea;n th&#x1ee7; t&#x1ee5;c&quot;, &quot;Qu&#x1ea3;n l&#xfd;&quot; })" type="code"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="EDIT"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtChucVuView">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="UTM Centur" size="18" style="0"/>
-                </Property>
-                <Property name="autoscrolls" type="boolean" value="false"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="VIEW"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-          </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="btnHuy">
           <Properties>
@@ -714,34 +666,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXacNhanActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblBangCap">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="UTM Centur" size="18" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="B&#x1eb1;ng c&#x1ea5;p"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtBangCap">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="UTM Centur" size="18" style="0"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBangCapActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="dcThoiHanBC">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblThoiHanBC">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="UTM Centur" size="18" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Th&#x1edd;i h&#x1ea1;n b&#x1eb1;ng c&#x1ea5;p"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblStarHoTen">
           <Properties>
@@ -839,6 +763,19 @@
             <Property name="autoscrolls" type="boolean" value="true"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JComboBox" name="cmbLoaiKH">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="UTM Centur" size="18" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;C&#xe1; nh&#xe2;n&quot;, &quot;Doanh nghi&#x1ec7;p&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pnlDanhSach">
@@ -866,11 +803,6 @@
                   <Component id="btnTimKiem" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="spDanhSach" min="-2" pref="527" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              </Group>
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
                   <Component id="lblDanhSach" min="-2" max="-2" attributes="0"/>
@@ -884,6 +816,11 @@
                   <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                   <Component id="btnSua" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="spDanhSach" min="-2" pref="582" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -916,7 +853,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="UTM Centur" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch nh&#xe2;n vi&#xea;n"/>
+            <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch kh&#xe1;ch h&#xe0;ng"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTimKiem">
@@ -955,11 +892,14 @@
                   <Font name="UTM Centur" size="18" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="6">
-                    <Column editable="false" title="M&#xe3; NV" type="java.lang.Object"/>
+                  <Table columnCount="7" rowCount="6">
+                    <Column editable="false" title="M&#xe3; KH" type="java.lang.Object"/>
                     <Column editable="false" title="H&#x1ecd; t&#xea;n" type="java.lang.Object"/>
-                    <Column editable="false" title="Ch&#x1ee9;c v&#x1ee5;" type="java.lang.Object"/>
-                    <Column editable="false" title="Ng&#xe0;y v&#xe0;o l&#xe0;m" type="java.lang.Object"/>
+                    <Column editable="false" title="CCCD" type="java.lang.Object"/>
+                    <Column editable="false" title="Gi&#x1edb;i t&#xed;nh" type="java.lang.Object"/>
+                    <Column editable="false" title="Qu&#x1ed1;c t&#x1ecb;ch" type="java.lang.Object"/>
+                    <Column editable="false" title="Lo&#x1ea1;i KH" type="java.lang.Object"/>
+                    <Column editable="false" title="H&#x1ea1;ng" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="autoResizeMode" type="int" value="4"/>
@@ -970,7 +910,7 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
+                    <Column maxWidth="80" minWidth="80" prefWidth="80" resizable="true">
                       <Title editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                         <Connection component="lblHoTen" name="text" type="property"/>
                       </Title>
@@ -978,16 +918,27 @@
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                        <Connection component="lblChucVu" name="text" type="property"/>
-                      </Title>
+                      <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                        <Connection component="lblNgayVaoLam" name="text" type="property"/>
-                      </Title>
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
