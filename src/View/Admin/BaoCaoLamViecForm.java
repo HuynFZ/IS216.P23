@@ -4,6 +4,21 @@
  */
 package View.Admin;
 
+import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
 import java.awt.Component;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -48,17 +63,22 @@ import java.awt.BorderLayout;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-/**
- *
- * @author Huy Nguyen
- */
 public class BaoCaoLamViecForm extends javax.swing.JPanel {
     /**
      * Creates new form QLChuyenBayForm
      */
     private final String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private final String DB_USER = "hanghk";
+    private final String DB_USER = "c##QLHHK";
     private final String DB_PASSWORD = "Admin123";
     private final String[] tatCaCacThangModel = new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12", "Tất cả các tháng" };
     
@@ -475,9 +495,9 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addGap(104, 104, 104)
                 .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
                 .addComponent(chuyenBayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
+                .addGap(144, 144, 144))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,7 +506,7 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chuyenBayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(veButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(419, Short.MAX_VALUE))
+                .addContainerGap(536, Short.MAX_VALUE))
         );
 
         vePanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -510,12 +530,18 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        DanhSachVeTable.setRowHeight(35);
         luotVe.setViewportView(DanhSachVeTable);
 
         xuatBaoCaoButton.setBackground(new java.awt.Color(0, 255, 255));
         xuatBaoCaoButton.setFont(new java.awt.Font("UTM Centur", 1, 18)); // NOI18N
         xuatBaoCaoButton.setForeground(new java.awt.Color(0, 51, 102));
         xuatBaoCaoButton.setText("Xuất báo cáo");
+        xuatBaoCaoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xuatBaoCaoButtonActionPerformed(evt);
+            }
+        });
 
         backBackButton.setBackground(new java.awt.Color(0, 255, 255));
         backBackButton.setFont(new java.awt.Font("UTM Centur", 1, 18)); // NOI18N
@@ -527,7 +553,7 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
             }
         });
 
-        chonThangLabel.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        chonThangLabel.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         chonThangLabel.setForeground(new java.awt.Color(0, 51, 102));
         chonThangLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chonThangLabel.setText("Chọn tháng ");
@@ -538,13 +564,13 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
         chonQuyComboBox.setFont(new java.awt.Font("UTM Aptima", 0, 14)); // NOI18N
         chonQuyComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quý 1", "Quý 2", "Quý 3", "Quý 4", "Tất cả các quý" }));
 
-        chonQuyLabel.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        chonQuyLabel.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         chonQuyLabel.setForeground(new java.awt.Color(0, 51, 102));
         chonQuyLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chonQuyLabel.setText("Chọn quý ");
 
         tatCaNamButton.setBackground(new java.awt.Color(0, 255, 255));
-        tatCaNamButton.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        tatCaNamButton.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         tatCaNamButton.setForeground(new java.awt.Color(0, 51, 102));
         tatCaNamButton.setText("Chọn tất cả các năm");
         tatCaNamButton.addActionListener(new java.awt.event.ActionListener() {
@@ -554,7 +580,7 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
         });
 
         namCuTheButton.setBackground(new java.awt.Color(0, 255, 255));
-        namCuTheButton.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        namCuTheButton.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         namCuTheButton.setForeground(new java.awt.Color(0, 51, 102));
         namCuTheButton.setText("Chọn năm cụ thể");
         namCuTheButton.addActionListener(new java.awt.event.ActionListener() {
@@ -563,20 +589,25 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
             }
         });
 
-        vuiLongLabel.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        vuiLongLabel.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         vuiLongLabel.setForeground(new java.awt.Color(0, 51, 102));
         vuiLongLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         vuiLongLabel.setText("Vui lòng chọn một trong hai để lọc");
 
-        nhapNamLabel.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        nhapNamLabel.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         nhapNamLabel.setForeground(new java.awt.Color(0, 51, 102));
         nhapNamLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nhapNamLabel.setText("Nhập năm (Vui lòng enter khi nhập xong)");
 
         nhapNamTextField.setFont(new java.awt.Font("UTM Aptima", 0, 14)); // NOI18N
+        nhapNamTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nhapNamTextFieldActionPerformed(evt);
+            }
+        });
 
         locButton.setBackground(new java.awt.Color(0, 255, 255));
-        locButton.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        locButton.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         locButton.setForeground(new java.awt.Color(0, 51, 102));
         locButton.setText("Lọc");
         locButton.addActionListener(new java.awt.event.ActionListener() {
@@ -589,9 +620,14 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
         xemBaoCaoButton.setFont(new java.awt.Font("UTM Centur", 1, 18)); // NOI18N
         xemBaoCaoButton.setForeground(new java.awt.Color(0, 51, 102));
         xemBaoCaoButton.setText("Xem báo cáo");
+        xemBaoCaoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xemBaoCaoButtonActionPerformed(evt);
+            }
+        });
 
         boButton.setBackground(new java.awt.Color(0, 255, 255));
-        boButton.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        boButton.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         boButton.setForeground(new java.awt.Color(0, 51, 102));
         boButton.setText("Bỏ chọn");
         boButton.addActionListener(new java.awt.event.ActionListener() {
@@ -611,37 +647,29 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
         );
         chartPanelVeLayout.setVerticalGroup(
             chartPanelVeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 175, Short.MAX_VALUE)
+            .addGap(0, 305, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout vePanelLayout = new javax.swing.GroupLayout(vePanel);
         vePanel.setLayout(vePanelLayout);
         vePanelLayout.setHorizontalGroup(
             vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vePanelLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(xemBaoCaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(vePanelLayout.createSequentialGroup()
-                        .addGap(247, 247, 247)
-                        .addComponent(backBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vePanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(xuatBaoCaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(xuatBaoCaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
             .addGroup(vePanelLayout.createSequentialGroup()
                 .addGroup(vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vePanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(luotVe, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE))
+                        .addComponent(luotVe))
                     .addGroup(vePanelLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chonThangLabel)
-                            .addComponent(nhapNamLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(vuiLongLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
+                            .addComponent(vuiLongLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nhapNamLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(vePanelLayout.createSequentialGroup()
                                 .addGroup(vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -651,22 +679,30 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
                                 .addGroup(vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(namCuTheButton)
                                     .addGroup(vePanelLayout.createSequentialGroup()
-                                        .addComponent(chonQuyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(chonQuyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)
                                         .addComponent(chonQuyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(nhapNamTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 53, 53)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE))
+                    .addGroup(vePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(chartPanelVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vePanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(locButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boButton))
-                .addGap(465, 465, 465))
             .addGroup(vePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chartPanelVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(vePanelLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(xemBaoCaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(214, 214, 214)
+                        .addComponent(backBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(vePanelLayout.createSequentialGroup()
+                        .addGap(561, 561, 561)
+                        .addGroup(vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(boButton)
+                            .addGroup(vePanelLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(locButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         vePanelLayout.setVerticalGroup(
             vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -692,21 +728,21 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
                 .addGroup(vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nhapNamTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nhapNamLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addGap(15, 15, 15)
                 .addComponent(boButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addComponent(locButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(luotVe, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(luotVe, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chartPanelVe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(vePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(xuatBaoCaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(xemBaoCaoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(backBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         chuyenBayPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -730,6 +766,7 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        DanhSachCBTable.setRowHeight(35);
         luotCB.setViewportView(DanhSachCBTable);
         if (DanhSachCBTable.getColumnModel().getColumnCount() > 0) {
             DanhSachCBTable.getColumnModel().getColumn(4).setResizable(false);
@@ -755,7 +792,7 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
             }
         });
 
-        thangLabel.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        thangLabel.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         thangLabel.setForeground(new java.awt.Color(0, 51, 102));
         thangLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         thangLabel.setText("Chọn tháng ");
@@ -766,13 +803,13 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
         quyComboBox.setFont(new java.awt.Font("UTM Aptima", 0, 14)); // NOI18N
         quyComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quý 1", "Quý 2", "Quý 3", "Quý 4", "Tất cả các quý" }));
 
-        quyLabel.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        quyLabel.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         quyLabel.setForeground(new java.awt.Color(0, 51, 102));
         quyLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         quyLabel.setText("Chọn quý ");
 
         allYearButton.setBackground(new java.awt.Color(0, 255, 255));
-        allYearButton.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        allYearButton.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         allYearButton.setForeground(new java.awt.Color(0, 51, 102));
         allYearButton.setText("Chọn tất cả các năm");
         allYearButton.addActionListener(new java.awt.event.ActionListener() {
@@ -782,7 +819,7 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
         });
 
         specificYearButton.setBackground(new java.awt.Color(0, 255, 255));
-        specificYearButton.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        specificYearButton.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         specificYearButton.setForeground(new java.awt.Color(0, 51, 102));
         specificYearButton.setText("Chọn năm cụ thể");
         specificYearButton.addActionListener(new java.awt.event.ActionListener() {
@@ -791,12 +828,12 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
             }
         });
 
-        pleaseLabel.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        pleaseLabel.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         pleaseLabel.setForeground(new java.awt.Color(0, 51, 102));
         pleaseLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         pleaseLabel.setText("Vui lòng chọn một trong hai để lọc");
 
-        namLabel.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        namLabel.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         namLabel.setForeground(new java.awt.Color(0, 51, 102));
         namLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         namLabel.setText("Nhập năm (Vui lòng enter khi nhập xong)");
@@ -804,7 +841,7 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
         namTextField.setFont(new java.awt.Font("UTM Aptima", 0, 14)); // NOI18N
 
         locCBButton.setBackground(new java.awt.Color(0, 255, 255));
-        locCBButton.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        locCBButton.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         locCBButton.setForeground(new java.awt.Color(0, 51, 102));
         locCBButton.setText("Lọc");
         locCBButton.addActionListener(new java.awt.event.ActionListener() {
@@ -824,7 +861,7 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
         });
 
         boChonButton.setBackground(new java.awt.Color(0, 255, 255));
-        boChonButton.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
+        boChonButton.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
         boChonButton.setForeground(new java.awt.Color(0, 51, 102));
         boChonButton.setText("Bỏ chọn");
         boChonButton.addActionListener(new java.awt.event.ActionListener() {
@@ -843,7 +880,7 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
         );
         chartPanelLayout.setVerticalGroup(
             chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 195, Short.MAX_VALUE)
+            .addGap(0, 302, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout chuyenBayPanelLayout = new javax.swing.GroupLayout(chuyenBayPanel);
@@ -856,10 +893,10 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, chuyenBayPanelLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(xemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(xemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(xuatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addComponent(xuatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
             .addGroup(chuyenBayPanelLayout.createSequentialGroup()
                 .addGroup(chuyenBayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(chuyenBayPanelLayout.createSequentialGroup()
@@ -869,8 +906,8 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
                         .addGap(62, 62, 62)
                         .addGroup(chuyenBayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(namLabel)
-                            .addComponent(pleaseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(thangLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pleaseLabel)
+                            .addComponent(thangLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(chuyenBayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(chuyenBayPanelLayout.createSequentialGroup()
@@ -881,22 +918,24 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
                                 .addGroup(chuyenBayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(specificYearButton)
                                     .addGroup(chuyenBayPanelLayout.createSequentialGroup()
-                                        .addComponent(quyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                                        .addComponent(quyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
                                         .addComponent(quyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(namTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, chuyenBayPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(chuyenBayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(locCBButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boChonButton))
-                .addGap(421, 421, 421))
             .addGroup(chuyenBayPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, chuyenBayPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(chuyenBayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(chuyenBayPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(locCBButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boChonButton))
+                .addGap(478, 478, 478))
         );
         chuyenBayPanelLayout.setVerticalGroup(
             chuyenBayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -919,13 +958,13 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
                     .addComponent(namLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addComponent(boChonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(locCBButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(luotCB, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(luotCB, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(chuyenBayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(xuatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(xemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -941,34 +980,34 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
             .addGroup(CardLayoutPanelLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(400, Short.MAX_VALUE))
+                .addContainerGap(448, Short.MAX_VALUE))
             .addGroup(CardLayoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(CardLayoutPanelLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(vePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(448, Short.MAX_VALUE)))
+                    .addContainerGap(300, Short.MAX_VALUE)))
             .addGroup(CardLayoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(CardLayoutPanelLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(chuyenBayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(442, Short.MAX_VALUE)))
+                    .addContainerGap(334, Short.MAX_VALUE)))
         );
         CardLayoutPanelLayout.setVerticalGroup(
             CardLayoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CardLayoutPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
             .addGroup(CardLayoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(CardLayoutPanelLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(vePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(120, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(CardLayoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(CardLayoutPanelLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(chuyenBayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(122, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         add(CardLayoutPanel, "card2");
@@ -1394,9 +1433,28 @@ public class BaoCaoLamViecForm extends javax.swing.JPanel {
     }//GEN-LAST:event_xemButtonActionPerformed
 
     private void xuatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xuatButtonActionPerformed
-        // TODO add your handling code here:
-        
+        if (DanhSachCBTable.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Không có dữ liệu để xuất!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        exportToPdfCB(); 
     }//GEN-LAST:event_xuatButtonActionPerformed
+
+    private void nhapNamTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nhapNamTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nhapNamTextFieldActionPerformed
+
+    private void xemBaoCaoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xemBaoCaoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xemBaoCaoButtonActionPerformed
+
+    private void xuatBaoCaoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xuatBaoCaoButtonActionPerformed
+        if (DanhSachVeTable.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Không có dữ liệu để xuất!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        exportToPdfVe(); 
+    }//GEN-LAST:event_xuatBaoCaoButtonActionPerformed
      
 private void locDuLieuChuyenBayTable(Integer thangFilter, Integer quyFilter, Integer namFilter) {
         DefaultTableModel tableModel = (DefaultTableModel) DanhSachCBTable.getModel();
@@ -1464,6 +1522,150 @@ private void locDuLieuChuyenBayTable(Integer thangFilter, Integer quyFilter, Int
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Đã có lỗi không mong muốn xảy ra: " + e.getMessage(), "Lỗi Chung", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void exportToPdfCB() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn nơi lưu file báo cáo");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf"));
+        String suggestedFileName = "BaoCaoDoanhThuChuyenBay_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".pdf";
+        fileChooser.setSelectedFile(new File(suggestedFileName));
+
+        int userSelection = fileChooser.showSaveDialog(this);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            String filePath = fileToSave.getAbsolutePath();
+            if (!filePath.toLowerCase().endsWith(".pdf")) {
+                filePath += ".pdf";
+            }
+
+            try {
+                PdfWriter writer = new PdfWriter(filePath);
+                PdfDocument pdf = new PdfDocument(writer);
+                Document document = new Document(pdf, PageSize.A4) {}; // Dòng này bây giờ sẽ hoạt động
+                document.setMargins(30, 30, 30, 30);
+
+                // SỬA LỖI TẠO FONT
+                // Đảm bảo bạn đã tạo thư mục 'fonts' và copy file 'arial.ttf' vào đó
+                PdfFont font = PdfFontFactory.createFont("fonts/times.ttf", PdfEncodings.IDENTITY_H);
+
+                Paragraph title = new Paragraph("BÁO CÁO DOANH THU CHUYẾN BAY")
+                        .setFont(font).setFontSize(20).setBold()
+                        .setTextAlignment(TextAlignment.CENTER);
+                document.add(title);
+
+                Paragraph reportDate = new Paragraph("Báo cáo được tạo lúc: " + new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(new Date()))
+                        .setFont(font).setFontSize(10).setItalic()
+                        .setTextAlignment(TextAlignment.CENTER);
+                document.add(reportDate);
+                document.add(new Paragraph("\n"));
+
+                document.add(new Paragraph("I. Bảng thống kê chi tiết").setFont(font).setBold());
+                Table pdfTable = new Table(UnitValue.createPercentArray(DanhSachCBTable.getColumnCount())).useAllAvailableWidth();
+                for (int i = 0; i < DanhSachCBTable.getColumnCount(); i++) {
+                    pdfTable.addHeaderCell(new Cell().add(new Paragraph(DanhSachCBTable.getColumnName(i)).setFont(font).setBold()));
+                }
+                for (int row = 0; row < DanhSachCBTable.getRowCount(); row++) {
+                    for (int col = 0; col < DanhSachCBTable.getColumnCount(); col++) {
+                        Object cellValue = DanhSachCBTable.getValueAt(row, col);
+                        pdfTable.addCell(new Cell().add(new Paragraph(cellValue != null ? cellValue.toString() : "").setFont(font)));
+                    }
+                }
+                document.add(pdfTable);
+                document.add(new Paragraph("\n"));
+
+                document.add(new Paragraph("II. Biểu đồ tổng quan doanh thu").setFont(font).setBold());
+               // ChartPanel chartPanelI = new ChartPanel(this.chartPanel);
+                ChartPanel chartPanelI = (ChartPanel) chartPanel.getComponent(0);
+                JFreeChart chartCB = chartPanelI.getChart();
+                BufferedImage chartImage = chartCB.createBufferedImage(500, 300);
+                ByteArrayOutputStream chartBaos = new ByteArrayOutputStream();
+                ImageIO.write(chartImage, "png", chartBaos);
+                ImageData chartData = ImageDataFactory.create(chartBaos.toByteArray());
+                Image pdfChartImage = new Image(chartData);
+                document.add(pdfChartImage);
+
+                document.close(); // Dòng này bây giờ sẽ hoạt động
+
+                JOptionPane.showMessageDialog(this, "Xuất file PDF thành công!\n" + filePath, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi khi xuất file PDF: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    private void exportToPdfVe() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn nơi lưu file báo cáo");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf"));
+        String suggestedFileName = "BaoCaoDoanhThuVe_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".pdf";
+        fileChooser.setSelectedFile(new File(suggestedFileName));
+
+        int userSelection = fileChooser.showSaveDialog(this);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            String filePath = fileToSave.getAbsolutePath();
+            if (!filePath.toLowerCase().endsWith(".pdf")) {
+                filePath += ".pdf";
+            }
+
+            try {
+                PdfWriter writer = new PdfWriter(filePath);
+                PdfDocument pdf = new PdfDocument(writer);
+                Document document = new Document(pdf, PageSize.A4) {}; // Dòng này bây giờ sẽ hoạt động
+                document.setMargins(30, 30, 30, 30);
+
+                // SỬA LỖI TẠO FONT
+                // Đảm bảo bạn đã tạo thư mục 'fonts' và copy file 'arial.ttf' vào đó
+                PdfFont font = PdfFontFactory.createFont("fonts/times.ttf", PdfEncodings.IDENTITY_H);
+
+                Paragraph title = new Paragraph("BÁO CÁO DOANH THU VÉ MÁY BAY ")
+                        .setFont(font).setFontSize(20).setBold()
+                        .setTextAlignment(TextAlignment.CENTER);
+                document.add(title);
+
+                Paragraph reportDate = new Paragraph("Báo cáo được tạo lúc: " + new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(new Date()))
+                        .setFont(font).setFontSize(10).setItalic()
+                        .setTextAlignment(TextAlignment.CENTER);
+                document.add(reportDate);
+                document.add(new Paragraph("\n"));
+
+                document.add(new Paragraph("I. Bảng thống kê chi tiết").setFont(font).setBold());
+                Table pdfTable = new Table(UnitValue.createPercentArray(DanhSachVeTable.getColumnCount())).useAllAvailableWidth();
+                for (int i = 0; i < DanhSachVeTable.getColumnCount(); i++) {
+                    pdfTable.addHeaderCell(new Cell().add(new Paragraph(DanhSachVeTable.getColumnName(i)).setFont(font).setBold()));
+                }
+                for (int row = 0; row < DanhSachVeTable.getRowCount(); row++) {
+                    for (int col = 0; col < DanhSachVeTable.getColumnCount(); col++) {
+                        Object cellValue = DanhSachVeTable.getValueAt(row, col);
+                        pdfTable.addCell(new Cell().add(new Paragraph(cellValue != null ? cellValue.toString() : "").setFont(font)));
+                    }
+                }
+                document.add(pdfTable);
+                document.add(new Paragraph("\n"));
+
+                document.add(new Paragraph("II. Biểu đồ tổng quan doanh thu").setFont(font).setBold());
+               // ChartPanel chartPanelI = new ChartPanel(this.chartPanel);
+                ChartPanel chartPanelI = (ChartPanel) chartPanelVe.getComponent(0);
+                JFreeChart chartCB = chartPanelI.getChart();
+                BufferedImage chartImage = chartCB.createBufferedImage(500, 300);
+                ByteArrayOutputStream chartBaos = new ByteArrayOutputStream();
+                ImageIO.write(chartImage, "png", chartBaos);
+                ImageData chartData = ImageDataFactory.create(chartBaos.toByteArray());
+                Image pdfChartImage = new Image(chartData);
+                document.add(pdfChartImage);
+
+                document.close(); // Dòng này bây giờ sẽ hoạt động
+
+                JOptionPane.showMessageDialog(this, "Xuất file PDF thành công!\n" + filePath, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi khi xuất file PDF: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
      

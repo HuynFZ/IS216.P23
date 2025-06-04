@@ -30,6 +30,7 @@ public class Menu extends javax.swing.JPanel {
        listMenu1.addItem(new PrMenu("2", "Quản lý chuyến bay", PrMenu.MenuType.MENU));
        listMenu1.addItem(new PrMenu("3", "Quản lý máy bay", PrMenu.MenuType.MENU));
        listMenu1.addItem(new PrMenu("4", "Quản lý nhân viên", PrMenu.MenuType.MENU));
+       listMenu1.addItem(new PrMenu("13", "Quản lý khách hàng", PrMenu.MenuType.MENU));
        listMenu1.addItem(new PrMenu("5", "Quản lý đặt vé", PrMenu.MenuType.MENU));
        listMenu1.addItem(new PrMenu("6", "Quản lý hành lý", PrMenu.MenuType.MENU));
        listMenu1.addItem(new PrMenu("11", "Phân công công việc", PrMenu.MenuType.MENU));
@@ -86,8 +87,8 @@ public class Menu extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelMoving, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

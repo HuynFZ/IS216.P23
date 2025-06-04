@@ -416,11 +416,11 @@ public class DatVe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TrangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrangChuActionPerformed
-        TrangChu trangchu = new TrangChu();
-        trangchu.setVisible(true);
-        trangchu.pack();
-        trangchu.setLocationRelativeTo(null);
-        this.dispose();
+//        TrangChu trangchu = new TrangChu();
+//        trangchu.setVisible(true);
+//        trangchu.pack();
+//        trangchu.setLocationRelativeTo(null);
+//        this.dispose();
     }//GEN-LAST:event_TrangChuActionPerformed
 
     private void DatVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatVeActionPerformed

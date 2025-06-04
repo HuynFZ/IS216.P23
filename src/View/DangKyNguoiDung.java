@@ -4,6 +4,9 @@ package View;
 import Process.UserJava;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -250,28 +253,9 @@ public class DangKyNguoiDung extends javax.swing.JFrame {
         String passwordHash = this.HashPassword(passwordText);
         System.out.println("PasswordHash: " + passwordHash);
         
-        UserJava user = new UserJava();
-
-        //Lay ket qua tu CSDL
-        int countRecord = user.themUser(usernameText, fullnameText, emailText, passwordHash);
-
-        if (countRecord > 0) {
-            JOptionPane.showMessageDialog(this, "Thêm thành công!");
-            //hide();
-        }
-        else if (countRecord == -2000) {
-            JOptionPane optionPane = new JOptionPane("Tài khoản đã được đăng ký", JOptionPane.ERROR_MESSAGE);
-            JDialog dialog = optionPane.createDialog("Đăng ký thất bại");
-            dialog.setAlwaysOnTop(true);
-            dialog.setVisible(true);
-        }
-        else
-        {
-            JOptionPane optionPane = new JOptionPane("Đăng ký thất bại!", JOptionPane.ERROR_MESSAGE);
-            JDialog dialog = optionPane.createDialog("Failure");
-            dialog.setAlwaysOnTop(true);
-            dialog.setVisible(true);
-        }
+        new XacThucTK(emailText, fullnameText, this).setVisible(true);
+       
+        
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private String HashPassword (String password)
@@ -292,6 +276,49 @@ public class DangKyNguoiDung extends javax.swing.JFrame {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public boolean onOTPVerified(boolean success) throws SQLException {
+        if (success) {
+            String usernameText = usernameField.getText();
+        System.out.println("Username: " + usernameText);
+        String fullnameText = fullnameField.getText();
+        System.out.println("Full name: " + fullnameText);              
+        String emailText = emailField.getText();
+        System.out.println("Email: " + emailText);
+        String passwordText = jPasswordField1.getText();
+        System.out.println("Password: " + passwordText);
+        
+        String passwordHash = this.HashPassword(passwordText);
+        System.out.println("PasswordHash: " + passwordHash);
+            UserJava user = new UserJava();
+
+        //Lay ket qua tu CSDL
+        int countRecord = user.themUser(usernameText, fullnameText, emailText, passwordHash);
+
+        if (countRecord > 0) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công!");
+            //hide();
+            System.out.println(countRecord);
+            int check = user.themRole(countRecord);
+        }
+        else if (countRecord == -2000) {
+            JOptionPane optionPane = new JOptionPane("Tài khoản đã được đăng ký", JOptionPane.INFORMATION_MESSAGE);
+            JDialog dialog = optionPane.createDialog("Đăng ký không thành công");
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
+        }
+        else
+        {
+            JOptionPane optionPane = new JOptionPane("Đăng ký thất bại!", JOptionPane.ERROR_MESSAGE);
+            JDialog dialog = optionPane.createDialog("Failure");
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
+        }
+            return true;
+        } else {
+            return false;
+        }
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
