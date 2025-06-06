@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
 
 import Process.RoleGroupType;
@@ -12,14 +9,14 @@ import View.TrangChu.TrangChu;
 import java.awt.CardLayout;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Huy Nguyen
- */
+
 public class DangNhapNguoiDung extends javax.swing.JFrame {
 
     /**
@@ -288,7 +285,11 @@ public class DangNhapNguoiDung extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        try {
+            new DoiMatKhau().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(DangNhapNguoiDung.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
     
     private String HashPassword (String password)

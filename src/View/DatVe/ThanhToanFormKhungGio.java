@@ -3,9 +3,9 @@ package View.DatVe;
 
 import ConnectDB.ConnectionUtils;
 import Process.ChiaTime;
-import Process.HanhKhach.UserHanhKhach;
+import Model.HanhKhach.UserHanhKhach;
 import Process.KhuyenMai.KhuyenMaiDS;
-import Process.KhuyenMai.KhuyenMaiModel;
+import Model.KhuyenMai.KhuyenMaiModel;
 import Process.SanBay.TimSanBay;
 import Process.SanBay.TimTinhTP;
 import java.awt.event.ActionEvent;

@@ -1,7 +1,7 @@
 
 package View.DatVe;
 
-import Process.HanhKhach.UserHanhKhach;
+import Model.HanhKhach.UserHanhKhach;
 import View.TrangChu.DatVeForm;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;

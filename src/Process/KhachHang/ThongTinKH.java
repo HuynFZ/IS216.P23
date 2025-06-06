@@ -1,5 +1,6 @@
 package Process.KhachHang;
 
+import Model.KhachHang.KhachHangModel;
 import ConnectDB.ConnectionUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

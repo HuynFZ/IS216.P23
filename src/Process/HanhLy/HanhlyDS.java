@@ -1,6 +1,7 @@
 
 package Process.HanhLy;
 
+import Model.HanhLy.HanhLyModel;
 import ConnectDB.ConnectionUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

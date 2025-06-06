@@ -1,8 +1,9 @@
 
 package Process.NhanVien;
 
+import Model.NhanVien.NhanVienModel;
 import ConnectDB.ConnectionUtils;
-import Process.KhachHang.KhachHangModel;
+import Model.KhachHang.KhachHangModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

@@ -116,7 +116,8 @@ public class QLKhachHangForm extends javax.swing.JPanel {
 //                    ? sdf.format(new java.util.Date(ts.getTime()))
 //                    : "";
                 String gt = rs.getString("GioiTinh");
-                if (gt.equals('M')) gt = "Nam";
+                if (gt == null) gt = "Nam";
+                else if (gt.equals('M')) gt = "Nam";
                 else gt = "Nữ";
                 model.addRow(new Object[]{
                     rs.getString("MaKhachHang"),
@@ -1448,7 +1449,7 @@ public class QLKhachHangForm extends javax.swing.JPanel {
                 // - HOẶC "Nhân viên '[maNV]' không có tài khoản nào được liên kết."
                 // Vì vậy, thông báo ở đây nên tập trung vào việc xóa thành công bản ghi NHAN_VIEN.
                 JOptionPane.showMessageDialog(null, 
-                    "Đã xóa thành công thông tin nhân viên '" + maNV + "'.",
+                    "Đã xóa thành công thông tin khách hàng '" + maNV + "'.",
                     "Xóa Nhân Viên Thành Công",
                     JOptionPane.INFORMATION_MESSAGE);
                 return true;
@@ -1471,13 +1472,13 @@ public class QLKhachHangForm extends javax.swing.JPanel {
         } catch (SQLException exSQL) {
             exSQL.printStackTrace();
             JOptionPane.showMessageDialog(null, // Thay 'null' bằng 'this'
-                "Lỗi CSDL khi xóa thông tin nhân viên '" + maNV + "': " + exSQL.getMessage(),
+                "Lỗi CSDL khi xóa thông tin khách hàng '" + maNV + "': " + exSQL.getMessage(),
                 "Lỗi CSDL",
                 JOptionPane.ERROR_MESSAGE);
             // QUAN TRỌNG: Ở điểm này, tài khoản của nhân viên CÓ THỂ đã được xóa thành công ở Bước 1.
             // Nhưng việc xóa bản ghi nhân viên khỏi bảng NHAN_VIEN đã thất bại.
             // Đây là một trạng thái không nhất quán tiềm ẩn. Cần ghi log cẩn thận.
-            System.err.println("CẢNH BÁO NGHIÊM TRỌNG: Tài khoản của nhân viên '" + maNV +
+            System.err.println("CẢNH BÁO NGHIÊM TRỌNG: Tài khoản của khách hàng '" + maNV +
                                "' có thể đã được xóa, nhưng xóa bản ghi NHAN_VIEN khỏi bảng NHAN_VIEN thất bại! " +
                                "Cần kiểm tra dữ liệu thủ công.");
         } catch (Exception ex) { // Bắt các Exception chung khác
@@ -1616,7 +1617,7 @@ public class QLKhachHangForm extends javax.swing.JPanel {
                 currentMode = Mode.VIEW;
                 applyNormalStyle();
                 // Đổi text lblThaoTac
-                lblThaoTac.setText("Thông tin nhân viên");
+                lblThaoTac.setText("Thông tin khách hàng");
                 // Tắt btnXacNhan và btnHuy
                 btnXacNhan.setVisible(false);
                 btnHuy.setVisible(false);
@@ -1698,7 +1699,7 @@ public class QLKhachHangForm extends javax.swing.JPanel {
                 // Chỉnh mode sang NONE
                 currentMode = Mode.NONE;
                 // Đổi text lblThaoTac
-                lblThaoTac.setText("Thông tin nhân viên");
+                lblThaoTac.setText("Thông tin khách hàng");
                 // Clear các trường thông tin trong form
                 clearFormInput();                
                 // Tắt nút Xác nhận, Hủy

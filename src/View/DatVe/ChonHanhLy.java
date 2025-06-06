@@ -2,9 +2,9 @@
 package View.DatVe;
 
 import Process.HanhKhach.ChonChoCallBack;
-import Process.HanhKhach.UserHanhKhach;
+import Model.HanhKhach.UserHanhKhach;
 import Process.HanhLy.ChonHanhLyCallBack;
-import Process.HanhLy.HanhLyModel;
+import Model.HanhLy.HanhLyModel;
 import Process.HanhLy.HanhlyDS;
 import java.awt.event.MouseAdapter;
 import java.sql.SQLException;

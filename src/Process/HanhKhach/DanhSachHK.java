@@ -1,6 +1,7 @@
 
 package Process.HanhKhach;
 
+import Model.HanhKhach.UserHanhKhach;
 import ConnectDB.ConnectionUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

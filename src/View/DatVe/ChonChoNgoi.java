@@ -3,7 +3,7 @@ package View.DatVe;
 
 import Process.ChuyenBay.ChuyenBToMayB;
 import Process.HanhKhach.ChonChoCallBack;
-import Process.HanhKhach.UserHanhKhach;
+import Model.HanhKhach.UserHanhKhach;
 import Process.MayBay.SoDoGhe;
 import java.awt.Color;
 import java.awt.event.ActionEvent;

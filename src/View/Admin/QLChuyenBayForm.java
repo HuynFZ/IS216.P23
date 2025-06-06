@@ -360,6 +360,7 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
         String gioHaCanhStr = model.getValueAt(selectedRow, 4) != null ? model.getValueAt(selectedRow, 4).toString() : null;
         String trangThai = model.getValueAt(selectedRow, 5).toString();
         String giaVe = model.getValueAt(selectedRow, 6).toString();
+        String soGheTrong = model.getValueAt(selectedRow,7).toString();
        
         tuyenBayComboBox.setSelectedItem(maTuyenBay);
         int mayBayIndex = -1;
@@ -414,6 +415,7 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
 
         giaVeTextField.setText(giaVe);
         capNhatSoGheLabelTheoMaMayBay(maMayBay);
+        soGheTrongLBL.setText(soGheTrong);
         setFieldsEditable(false);
         
     }
@@ -514,6 +516,8 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
         gioCatCanhCalendar = new com.github.lgooddatepicker.components.DateTimePicker();
         gioHaCanhCalendar = new com.github.lgooddatepicker.components.DateTimePicker();
         thanhCongCuLabel = new javax.swing.JLabel();
+        soGheTrongLabel1 = new javax.swing.JLabel();
+        soGheTrongLBL = new javax.swing.JLabel();
         danhSachPanel = new javax.swing.JPanel();
         nhapMaCBTextField = new javax.swing.JTextField();
         timKiemLabel = new javax.swing.JLabel();
@@ -556,7 +560,7 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
         giaVeLabel.setText("Giá vé");
         giaVeLabel.setFont(new java.awt.Font("UTM Centur", 1, 18)); // NOI18N
 
-        soGheTrongLabel.setText("Số ghế trống");
+        soGheTrongLabel.setText("Số ghế ban đầu");
         soGheTrongLabel.setFont(new java.awt.Font("UTM Centur", 1, 18)); // NOI18N
 
         giaVeTextField.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
@@ -647,23 +651,29 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
 
         gioHaCanhCalendar.setFont(new java.awt.Font("UTM Centur", 0, 14)); // NOI18N
 
-        thanhCongCuLabel.setFont(new java.awt.Font("UTM Centur", 1, 24)); // NOI18N
-        thanhCongCuLabel.setForeground(new java.awt.Color(0, 51, 102));
         thanhCongCuLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         thanhCongCuLabel.setText("Thêm chuyến bay");
+        thanhCongCuLabel.setFont(new java.awt.Font("UTM Centur", 1, 24)); // NOI18N
+        thanhCongCuLabel.setForeground(new java.awt.Color(0, 51, 102));
+
+        soGheTrongLabel1.setFont(new java.awt.Font("UTM Centur", 1, 18)); // NOI18N
+        soGheTrongLabel1.setText("Số ghế trống");
+
+        soGheTrongLBL.setFont(new java.awt.Font("UTM Centur", 0, 18)); // NOI18N
+        soGheTrongLBL.setText("0");
 
         javax.swing.GroupLayout nutPanelLayout = new javax.swing.GroupLayout(nutPanel);
         nutPanel.setLayout(nutPanelLayout);
         nutPanelLayout.setHorizontalGroup(
             nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nutPanelLayout.createSequentialGroup()
-                .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(nutPanelLayout.createSequentialGroup()
+                .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nutPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(nutPanelLayout.createSequentialGroup()
-                                .addGap(175, 175, 175)
-                                .addComponent(giaVeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(277, 277, 277)
+                                .addComponent(soGheLabel))
                             .addGroup(nutPanelLayout.createSequentialGroup()
                                 .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(mayBayLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -673,36 +683,42 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
                                     .addComponent(trangThaiLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(soGheTrongLabel, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tuyenBayLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(xacNhanButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(45, 45, 45)
-                                .addComponent(thoatXemButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tuChoiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8))
-                            .addGroup(nutPanelLayout.createSequentialGroup()
-                                .addGap(277, 277, 277)
-                                .addComponent(soGheLabel))))
-                    .addGroup(nutPanelLayout.createSequentialGroup()
+                                    .addComponent(xacNhanButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(soGheTrongLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(nutPanelLayout.createSequentialGroup()
+                                        .addGap(45, 45, 45)
+                                        .addComponent(thoatXemButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tuChoiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(8, 8, 8))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nutPanelLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(giaVeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(nutPanelLayout.createSequentialGroup()
+                                        .addGap(136, 136, 136)
+                                        .addComponent(soGheTrongLBL)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nutPanelLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(themButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(gioHaCanhCalendar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(gioCatCanhCalendar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(nutPanelLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(xoaButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(gioHaCanhCalendar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                                    .addComponent(gioCatCanhCalendar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tuyenBayComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(mayBayComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(trangThaiComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(nutPanelLayout.createSequentialGroup()
+                                .addGap(134, 134, 134)
+                                .addComponent(xoaButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                                 .addComponent(suaButton)
-                                .addGap(18, 18, 18))
-                            .addComponent(tuyenBayComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mayBayComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(trangThaiComboBox, 0, 299, Short.MAX_VALUE))))
+                                .addGap(74, 74, 74))))
+                    .addComponent(thanhCongCuLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nutPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(thanhCongCuLabel)
-                .addGap(136, 136, 136))
         );
         nutPanelLayout.setVerticalGroup(
             nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -714,7 +730,7 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
                     .addComponent(xacNhanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tuChoiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(thoatXemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tuyenBayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tuyenBayLabel))
@@ -742,7 +758,11 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
                 .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(soGheTrongLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(soGheLabel))
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(soGheTrongLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(soGheTrongLBL))
+                .addGap(10, 10, 10)
                 .addGroup(nutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(themButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(xoaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -796,10 +816,10 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
         DanhSachChuyenBayTable.setRowHeight(35);
         jScrollPane1.setViewportView(DanhSachChuyenBayTable);
 
-        thanhTimKiemLabel.setFont(new java.awt.Font("UTM Centur", 1, 24)); // NOI18N
-        thanhTimKiemLabel.setForeground(new java.awt.Color(0, 51, 102));
         thanhTimKiemLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         thanhTimKiemLabel.setText("Thanh tìm kiếm");
+        thanhTimKiemLabel.setFont(new java.awt.Font("UTM Centur", 1, 24)); // NOI18N
+        thanhTimKiemLabel.setForeground(new java.awt.Color(0, 51, 102));
 
         javax.swing.GroupLayout danhSachPanelLayout = new javax.swing.GroupLayout(danhSachPanel);
         danhSachPanel.setLayout(danhSachPanelLayout);
@@ -809,7 +829,7 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
                 .addGroup(danhSachPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(danhSachPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1))
                     .addGroup(danhSachPanelLayout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addComponent(timKiemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -817,7 +837,7 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
                         .addComponent(nhapMaCBTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(timButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 212, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(danhSachPanelLayout.createSequentialGroup()
                 .addGap(170, 170, 170)
@@ -840,7 +860,7 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
                         .addComponent(timKiemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -848,20 +868,20 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addComponent(nutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(danhSachPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(danhSachPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(danhSachPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(danhSachPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
  
@@ -1282,7 +1302,9 @@ public class QLChuyenBayForm extends javax.swing.JPanel {
     private javax.swing.JTextField nhapMaCBTextField;
     private javax.swing.JPanel nutPanel;
     private javax.swing.JLabel soGheLabel;
+    private javax.swing.JLabel soGheTrongLBL;
     private javax.swing.JLabel soGheTrongLabel;
+    private javax.swing.JLabel soGheTrongLabel1;
     private javax.swing.JButton suaButton;
     private javax.swing.JLabel thanhCongCuLabel;
     private javax.swing.JLabel thanhTimKiemLabel;
