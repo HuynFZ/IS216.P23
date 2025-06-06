@@ -2,7 +2,7 @@
 package View.DatVe;
 
 import Process.ChiaTime;
-import Process.HanhKhach.UserHanhKhach;
+import Model.HanhKhach.UserHanhKhach;
 import Process.SanBay.TimSanBay;
 import Process.SanBay.TimTinhTP;
 import View.TrangChu.TrangChu;

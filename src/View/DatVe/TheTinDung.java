@@ -4,7 +4,7 @@ package View.DatVe;
 import Process.ChiaTime;
 import Process.HanhKhach.ThemHanhKhach;
 import Process.VeMayBay.ThemVeMayBay;
-import Process.HanhKhach.UserHanhKhach;
+import Model.HanhKhach.UserHanhKhach;
 import Process.KhachHang.LayEmailKH;
 import Process.KhachHang.LayMaKH;
 import Process.KhachHang.TruDiemKhachHang;

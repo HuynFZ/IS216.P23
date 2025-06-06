@@ -1,12 +1,12 @@
 
 package View.Admin;
 
-import Process.KhachHang.KhachHangModel;
+import Model.KhachHang.KhachHangModel;
 import Process.KhachHang.LayMaKH;
 import Process.KhachHang.SuaKhachHang;
 import Process.KhachHang.ThongTinKH;
 import Process.NhanVien.LayMaNV;
-import Process.NhanVien.NhanVienModel;
+import Model.NhanVien.NhanVienModel;
 import Process.NhanVien.SuaNhanVien;
 import Process.NhanVien.ThongTinNV;
 import View.TrangChu.TaiKhoanForm;

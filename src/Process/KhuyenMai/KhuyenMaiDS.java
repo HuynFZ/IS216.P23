@@ -1,5 +1,6 @@
 package Process.KhuyenMai;
 
+import Model.KhuyenMai.KhuyenMaiModel;
 import ConnectDB.ConnectionUtils;
 import java.sql.*;
 import java.util.ArrayList;

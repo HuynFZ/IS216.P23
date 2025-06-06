@@ -3,7 +3,7 @@ package View.TrangChu;
 
 import Process.KhachHang.LayMaKH;
 import Process.VeMayBay.DanhSachVe;
-import Process.VeMayBay.VeMayBayModel;
+import Model.VeMayBay.VeMayBayModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;

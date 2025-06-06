@@ -5,7 +5,7 @@ import Process.ChiaTime;
 import Process.TimeConverter;
 import Process.HanhKhach.DanhSachHK;
 import View.DatVe.*;
-import Process.HanhKhach.UserHanhKhach;
+import Model.HanhKhach.UserHanhKhach;
 import Process.KhuyenMai.LayGiaTriKM;
 import Process.SanBay.TimSanBay;
 import Process.SanBay.TimTinhTP;
@@ -107,6 +107,10 @@ public class XemChiTietVe extends javax.swing.JPanel {
         double giaTri = LayGiaTriKM.layGiaTriKM(maVe);
         
         lblGiamGia.setText(String.valueOf(giaTri));
+        
+        double tongTienSC = (tongGiaVe + thuePhi + phiBoSung);
+        
+        lblTongTien.setText(String.valueOf(tongTienSC));
         
 
         String tenThanhPhoDi = TimTinhTP.timTinhTP(diemDi);

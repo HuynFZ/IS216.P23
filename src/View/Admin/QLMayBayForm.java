@@ -267,8 +267,11 @@ public class QLMayBayForm extends javax.swing.JPanel {
             ORDER BY mb.MaMayBay
         """;
 
-        try (Connection conn = ConnectionUtils.getMyConnection();
-             Statement stmt = conn.createStatement();
+        try (Connection conn = ConnectionUtils.getMyConnection()){
+             conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+             conn.setAutoCommit(false);
+             
+             try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
@@ -278,6 +281,13 @@ public class QLMayBayForm extends javax.swing.JPanel {
                     rs.getString("TrangThai"),
                     rs.getString("TenViTriHienTai") // Lấy giá trị từ bí danh TenViTriHienTai
                 });
+            }
+            
+            conn.commit();
+        } catch (SQLException ex)
+            {
+            conn.rollback();
+            throw ex;
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();

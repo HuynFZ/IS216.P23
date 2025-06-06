@@ -1,7 +1,7 @@
 
 package Process.HanhLy;
 
-import Process.HanhKhach.UserHanhKhach;
+import Model.HanhKhach.UserHanhKhach;
 import java.util.List;
 
 
